@@ -10,8 +10,7 @@
       "src_2": "https://example.com/logo2.png",
       "status": "upcoming",
       "durationHours": 4,
-      "mpd": "https://filmyfly4wap.github.io/Live/?url=https://jiotvpllive.cdn.jio.com/bpk-tv/Sports18_1_HD_BTS/output/index.mpd&keyId=bd1ea6a1c1fb5dcdb709434e0826bbc0&key=f57f22cba32739ce7beb1fab3f3d060b"
-    },
+      "dai_url": "https://filmyfly4wap.github.io/Live1/?url=https://foxhindi.pages.dev/playlist.m3u8" },
     {
       "match_id": "2",
       "title": "IPL Match 2",
@@ -22,7 +21,7 @@
       "src_2": "https://example.com/logo4.png",
       "status": "upcoming",
       "durationHours": 6,
-       "mpd": "https://filmyfly4wap.github.io/Live/?url=https://jiotvpllive.cdn.jio.com/bpk-tv/Sports18_1_HD_BTS/output/index.mpd&keyId=bd1ea6a1c1fb5dcdb709434e0826bbc0&key=f57f22cba32739ce7beb1fab3f3d060b"
+       "dai_url": "https://filmyfly4wap.github.io/Live1/?url=https://foxhindi.pages.dev/playlist.m3u8"
     },
     {
       "match_id": "3",
