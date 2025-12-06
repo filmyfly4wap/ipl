@@ -11,13 +11,9 @@
       "status": "upcoming",
       "durationHours": 4,
       "videoStreams": [
-        "https://example.com/stream1.m3u8",
-        "https://example.com/stream2.mpd",
-        {
-          "url": "https://example.com/stream3.m3u8",
-          "quality": "1080p",
-          "label": "High Quality"
-        }
+        "https://filmyfly4wap.github.io/Live1/?url=https://foxhindi.pages.dev/playlist.m3u8",
+        "https://filmyfly4wap.github.io/Live/?url=https://jiotvpllive.cdn.jio.com/bpk-tv/Sports18_1_HD_BTS/output/index.mpd&keyId=bd1ea6a1c1fb5dcdb709434e0826bbc0&key=f57f22cba32739ce7beb1fab3f3d060b"
+       
       ]
     },
     {
@@ -30,8 +26,8 @@
       "src_2": "https://example.com/logo4.png",
       "status": "upcoming",
       "durationHours": 6,
-      "m3u8": "https://example.com/match2.m3u8",
-      "mpd": "https://example.com/match2.mpd"
+      "m3u8": "https://foxhindi.pages.dev/playlist.m3u8",
+      "mpd": "https://filmyfly4wap.github.io/Live/?url=https://jiotvpllive.cdn.jio.com/bpk-tv/Sports18_1_HD_BTS/output/index.mpd&keyId=bd1ea6a1c1fb5dcdb709434e0826bbc0&key=f57f22cba32739ce7beb1fab3f3d060b"
     },
     {
       "match_id": "3",
