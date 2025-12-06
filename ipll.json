@@ -5,41 +5,45 @@
       "title": "IPL Match 1",
       "team_1": "Mumbai Indians",
       "team_2": "Chennai Super Kings",
-      "startTime": "08:00:00 PM 14-12-2025",
+      "startTime": "08:00:00 PM 14-03-2024",
       "src": "https://example.com/logo1.png",
       "src_2": "https://example.com/logo2.png",
       "status": "upcoming",
       "durationHours": 4,
-      "dai_url": " https://filmyfly4wap.github.io/Live/?url=https://jiotvpllive.cdn.jio.com/bpk-tv/Sports18_1_HD_BTS/output/index.mpd&keyId=bd1ea6a1c1fb5dcdb709434e0826bbc0&key=f57f22cba32739ce7beb1fab3f3d060b",
-      "adfree_url": " https://filmyfly4wap.github.io/Live/?url=https://jiotvpllive.cdn.jio.com/bpk-tv/Sports18_1_HD_BTS/output/index.mpd&keyId=bd1ea6a1c1fb5dcdb709434e0826bbc0&key=f57f22cba32739ce7beb1fab3f3d060b"
-    
-      
+      "videoStreams": [
+        "https://example.com/stream1.m3u8",
+        "https://example.com/stream2.mpd",
+        {
+          "url": "https://example.com/stream3.m3u8",
+          "quality": "1080p",
+          "label": "High Quality"
+        }
+      ]
     },
     {
       "match_id": "2",
       "title": "IPL Match 2",
       "team_1": "Royal Challengers Bangalore",
       "team_2": "Kolkata Knight Riders",
-      "startTime": "02:00:00 PM 15-12-2025",
+      "startTime": "02:00:00 PM 15-03-2024",
       "src": "https://example.com/logo3.png",
       "src_2": "https://example.com/logo4.png",
       "status": "upcoming",
       "durationHours": 6,
-      "dai_url": "https://foxhindi.pages.dev/playlist.m3u8 ",
-      "adfree_url": " https://foxhindi.pages.dev/playlist.m3u8"
+      "m3u8": "https://example.com/match2.m3u8",
+      "mpd": "https://example.com/match2.mpd"
     },
     {
       "match_id": "3",
       "title": "IPL Match 3",
       "team_1": "Delhi Capitals",
       "team_2": "Sunrisers Hyderabad",
-      "startTime": "07:30:00 PM 15-12-2025",
+      "startTime": "07:30:00 PM 15-03-2024",
       "src": "https://example.com/logo5.png",
       "src_2": "https://example.com/logo6.png",
       "status": "upcoming",
       "durationHours": 8,
-      "dai_url": " ",
-      "adfree_url": " "
+      "streamUrl": "https://example.com/match3.m3u8"
     }
   ]
 }
