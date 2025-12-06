@@ -1,26 +1,37 @@
-
-
-
 {
-  "name": "Fancode Live Matches Data in Json",
-  "telegram": "https://t.me/+rQTz5VL8CRpjNTZl",
-  "last update time": "05:55:33 PM 05-12-2025",
   "matches": [
-
-
-  {
-    "event_category": "Formula 1",
-    "title": "Practice 2 vs Abu Dhabi (F1 ETIHAD AIRWAYS ABU DHABI GRAND PRIX 2025)",
-    "src": "https://www.fancode.com/skillup-uploads/cms-media/F1-AbuDhabi_Old_match-card.jpg",
-    "src_2": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f3/Abu_Dhabi_GP_logo.png/600px-Abu_Dhabi_GP_logo.png",
-    "team_1": "Practice 2",
-    "team_2": "Abu Dhabi",
-    "status": "UPCOMING",
-    "event_name": "F1 ETIHAD AIRWAYS ABU DHABI GRAND PRIX 2025",
-    "match_name": "Practice 2",
-    "match_id": 118497,
-    "startTime": "06:30:00 PM 06-12-2025"
-  }
-      
+    {
+      "match_id": "1",
+      "title": "IPL Match 1",
+      "team_1": "Mumbai Indians",
+      "team_2": "Chennai Super Kings",
+      "startTime": "08:00:00 PM 14-03-2024",
+      "src": "https://example.com/logo1.png",
+      "src_2": "https://example.com/logo2.png",
+      "status": "upcoming",
+      "durationHours": 4
+    },
+    {
+      "match_id": "2",
+      "title": "IPL Match 2",
+      "team_1": "Royal Challengers Bangalore",
+      "team_2": "Kolkata Knight Riders",
+      "startTime": "02:00:00 PM 15-03-2024",
+      "src": "https://example.com/logo3.png",
+      "src_2": "https://example.com/logo4.png",
+      "status": "upcoming",
+      "durationHours": 6
+    },
+    {
+      "match_id": "3",
+      "title": "IPL Match 3",
+      "team_1": "Delhi Capitals",
+      "team_2": "Sunrisers Hyderabad",
+      "startTime": "07:30:00 PM 15-03-2024",
+      "src": "https://example.com/logo5.png",
+      "src_2": "https://example.com/logo6.png",
+      "status": "upcoming",
+      "durationHours": 8
+    }
   ]
 }
