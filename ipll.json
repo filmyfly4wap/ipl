@@ -1,28 +1,36 @@
 {
   "name": "Fancode Live Matches Data in Json",
+  "telegram": "https://t.me/+rQTz5VL8CRpjNTZl",
+  "last update time": "10:30:45 PM 07-12-2025",
   "matches": [
     {
-      "match_id": 1, 
+      "match_id": 1,
       "event_category": "Formula 1",
       "title": "Practice 2 vs Abu Dhabi (F1 ETIHAD AIRWAYS ABU DHABI GRAND PRIX 2025)",
-      "src": " ",
-      "src_2": " ",
+      "src": "https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png",
+      "src_2": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Flag_of_Australia.svg/2560px-Flag_of_Australia.svg.png",
       "team_1": "CSK",
       "team_2": "MI",
-      "status": "UPCOMING",
-      "event_name": " Chennai Stadium",
+      "status": "LIVE",
+      "event_name": "Chennai Stadium",
       "match_name": "Practice 2",
-      "startTime": "11:54:00 AM 07-12-2025",
+      "startTime": "08:30:00 PM 07-12-2025",
       "durationHours": 6,
-      "dai_url": "https://24spn-webhost8.blogspot.com/?m=1" 
+      "dai_url": "http://217.20.112.199/sethd/index.m3u8",
+      "m3u8": "https://example.com/stream1.m3u8",
+      "mpd": "https://example.com/stream1.mpd",
+      "videoStreams": [
+        "https://example.com/stream1_1080p.m3u8",
+        "https://example.com/stream1_720p.m3u8",
+        "https://example.com/stream1_480p.m3u8"
+      ]
     },
-
     {
-      "match_id":2, 
+      "match_id": 2,
       "event_category": "Formula 2",
       "title": "Practice 2 vs Abu Dhabi (F1 ETIHAD AIRWAYS ABU DHABI GRAND PRIX 2025)",
-      "src": " ",
-      "src_2": " ",
+      "src": "https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png",
+      "src_2": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Flag_of_Sweden.svg/2560px-Flag_of_Sweden.svg.png",
       "team_1": "MI",
       "team_2": "KKR",
       "status": "UPCOMING",
@@ -30,8 +38,205 @@
       "match_name": "Practice 2",
       "startTime": "06:30:00 PM 07-12-2025",
       "durationHours": 6,
-      "dai_url": "https://filmyfly4wap.github.io/Live1/?url=https://anywhere.pwisetthon.com/http://103.175.242.10:8080/sonymax/index.m3u8"
+      "dai_url": "https://in-mc-fdlive.fancode.com/mumbai/138317_english_hls_50b6caeaec4746_1ta-di_h264/index.m3u8",
+      "m3u8": "https://example.com/stream2.m3u8",
+      "videoStreams": [
+        {
+          "url": "https://example.com/stream2_hd.m3u8",
+          "quality": "1080p",
+          "label": "HD Stream"
+        },
+        {
+          "url": "https://example.com/stream2_sd.m3u8",
+          "quality": "480p",
+          "label": "SD Stream"
+        }
+      ]
+    },
+    {
+      "match_id": 3,
+      "event_category": "IPL 2025",
+      "title": "Royal Challengers Bangalore vs Delhi Capitals - Match 15",
+      "src": "https://upload.wikimedia.org/wikipedia/en/thumb/2/2a/Royal_Challengers_Bangalore_Logo.svg/1200px-Royal_Challengers_Bangalore_Logo.svg.png",
+      "src_2": "https://upload.wikimedia.org/wikipedia/en/thumb/c/cd/Delhi_Capitals_Logo.svg/1200px-Delhi_Capitals_Logo.svg.png",
+      "team_1": "RCB",
+      "team_2": "DC",
+      "status": "UPCOMING",
+      "event_name": "M. Chinnaswamy Stadium",
+      "match_name": "IPL Match 15",
+      "startTime": "07:30:00 PM 08-12-2025",
+      "durationHours": 4,
+      "streamUrl": "https://example.com/ipl_match15.m3u8",
+      "adfree_url": "https://example.com/adfree_stream.m3u8",
+      "videoStreams": [
+        "https://example.com/rcb_vs_dc_high.m3u8",
+        "https://example.com/rcb_vs_dc_low.m3u8"
+      ]
+    },
+    {
+      "match_id": 4,
+      "event_category": "Football",
+      "title": "Premier League: Manchester United vs Liverpool",
+      "src": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png",
+      "src_2": "https://upload.wikimedia.org/wikipedia/en/thumb/0/0c/Liverpool_FC.svg/1200px-Liverpool_FC.svg.png",
+      "team_1": "Man United",
+      "team_2": "Liverpool",
+      "status": "LIVE",
+      "event_name": "Old Trafford",
+      "match_name": "Premier League",
+      "startTime": "09:00:00 PM 07-12-2025",
+      "durationHours": 2,
+      "m3u8": "https://example.com/football_live.m3u8",
+      "mpd": "https://example.com/football_live.mpd",
+      "videoStreams": [
+        {
+          "url": "https://example.com/epl_stream1.m3u8",
+          "quality": "1080p",
+          "label": "Main Camera"
+        },
+        {
+          "url": "https://example.com/epl_stream2.m3u8",
+          "quality": "720p",
+          "label": "Tactical View"
+        }
+      ]
+    },
+    {
+      "match_id": 5,
+      "event_category": "Cricket",
+      "title": "India vs Australia - 2nd Test Match",
+      "src": "https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png",
+      "src_2": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Flag_of_Australia.svg/2560px-Flag_of_Australia.svg.png",
+      "team_1": "India",
+      "team_2": "Australia",
+      "status": "UPCOMING",
+      "event_name": "Melbourne Cricket Ground",
+      "match_name": "Test Match",
+      "startTime": "05:00:00 AM 09-12-2025",
+      "durationHours": 8,
+      "streamUrl": "https://example.com/test_match.m3u8",
+      "videoStreams": [
+        "https://example.com/cricket_test_hd.m3u8",
+        "https://example.com/cricket_test_sd.m3u8"
+      ]
+    },
+    {
+      "match_id": 6,
+      "event_category": "NBA",
+      "title": "NBA Regular Season: Lakers vs Warriors",
+      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Los_Angeles_Lakers_logo.svg/1200px-Los_Angeles_Lakers_logo.svg.png",
+      "src_2": "https://upload.wikimedia.org/wikipedia/en/thumb/0/01/Golden_State_Warriors_logo.svg/1200px-Golden_State_Warriors_logo.svg.png",
+      "team_1": "Lakers",
+      "team_2": "Warriors",
+      "status": "UPCOMING",
+      "event_name": "Staples Center",
+      "match_name": "NBA Regular",
+      "startTime": "03:30:00 AM 09-12-2025",
+      "durationHours": 3,
+      "m3u8": "https://example.com/nba_live.m3u8",
+      "videoStreams": [
+        "https://example.com/nba_stream1.m3u8",
+        "https://example.com/nba_stream2.m3u8"
+      ]
+    },
+    {
+      "match_id": 7,
+      "event_category": "Tennis",
+      "title": "Wimbledon 2025: Men's Singles Final",
+      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Flag_of_Australia.svg/2560px-Flag_of_Australia.svg.png",
+      "src_2": "https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1200px-Flag_of_the_United_Kingdom.svg.png",
+      "team_1": "Djokovic",
+      "team_2": "Murray",
+      "status": "LIVE",
+      "event_name": "Centre Court",
+      "match_name": "Wimbledon Final",
+      "startTime": "02:00:00 PM 07-12-2025",
+      "durationHours": 5,
+      "streamUrl": "https://example.com/tennis_final.m3u8",
+      "videoStreams": [
+        {
+          "url": "https://example.com/wimbledon_court1.m3u8",
+          "quality": "1080p",
+          "label": "Court View"
+        },
+        {
+          "url": "https://example.com/wimbledon_court2.m3u8",
+          "quality": "720p",
+          "label": "Player View"
+        }
+      ]
+    },
+    {
+      "match_id": 8,
+      "event_category": "UFC",
+      "title": "UFC 300: Main Event",
+      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/2560px-Flag_of_the_United_States.svg.png",
+      "src_2": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/2560px-Flag_of_the_People%27s_Republic_of_China.svg.png",
+      "team_1": "McGregor",
+      "team_2": "Nurmagomedov",
+      "status": "UPCOMING",
+      "event_name": "T-Mobile Arena",
+      "match_name": "UFC Main Event",
+      "startTime": "11:00:00 PM 08-12-2025",
+      "durationHours": 4,
+      "m3u8": "https://example.com/ufc_300.m3u8",
+      "mpd": "https://example.com/ufc_300.mpd",
+      "videoStreams": [
+        "https://example.com/ufc_main.m3u8",
+        "https://example.com/ufc_prelims.m3u8"
+      ]
+    },
+    {
+      "match_id": 9,
+      "event_category": "IPL 2025",
+      "title": "Mumbai Indians vs Chennai Super Kings - El Clasico",
+      "src": "https://upload.wikimedia.org/wikipedia/en/thumb/c/cd/Mumbai_Indians_Logo.svg/1200px-Mumbai_Indians_Logo.svg.png",
+      "src_2": "https://upload.wikimedia.org/wikipedia/en/thumb/2/2b/Chennai_Super_Kings_Logo.svg/1200px-Chennai_Super_Kings_Logo.svg.png",
+      "team_1": "MI",
+      "team_2": "CSK",
+      "status": "UPCOMING",
+      "event_name": "Wankhede Stadium",
+      "match_name": "IPL El Clasico",
+      "startTime": "08:00:00 PM 09-12-2025",
+      "durationHours": 4,
+      "streamUrl": "https://example.com/ipl_elclasico.m3u8",
+      "adfree_url": "https://example.com/elclasico_adfree.m3u8",
+      "videoStreams": [
+        {
+          "url": "https://example.com/mi_vs_csk_1.m3u8",
+          "quality": "1080p",
+          "label": "Main Feed"
+        },
+        {
+          "url": "https://example.com/mi_vs_csk_2.m3u8",
+          "quality": "720p",
+          "label": "Skycam"
+        },
+        {
+          "url": "https://example.com/mi_vs_csk_3.m3u8",
+          "quality": "480p",
+          "label": "Spidercam"
+        }
+      ]
+    },
+    {
+      "match_id": 10,
+      "event_category": "Football",
+      "title": "Champions League Final: Real Madrid vs Bayern Munich",
+      "src": "https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/1200px-Real_Madrid_CF.svg.png",
+      "src_2": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg/1200px-FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg.png",
+      "team_1": "Real Madrid",
+      "team_2": "Bayern Munich",
+      "status": "UPCOMING",
+      "event_name": "Wembley Stadium",
+      "match_name": "UCL Final",
+      "startTime": "12:30:00 AM 10-12-2025",
+      "durationHours": 2.5,
+      "m3u8": "https://example.com/ucl_final.m3u8",
+      "videoStreams": [
+        "https://example.com/ucl_final_hd.m3u8",
+        "https://example.com/ucl_final_sd.m3u8"
+      ]
     }
-
   ]
 }
