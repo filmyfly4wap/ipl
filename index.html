@@ -3,7 +3,7 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8">
-  <title>TV4WAP LIVE4WAP - Live & Upcoming Matches</title>
+  <title>TV4WAP LIVE4WAP - Smart Duration Matches</title>
   <style>
     /* CSS STYLES */
     body {
@@ -198,6 +198,57 @@
       color: #dc2626;
     }
 
+    /* Duration Info */
+    .duration-info {
+      font-size: 11px;
+      color: #888;
+      margin-top: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .duration-icon {
+      font-size: 12px;
+    }
+
+    /* Video Format Badge */
+    .format-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 10px;
+      font-weight: bold;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    .m3u8-badge {
+      background-color: #4f46e5;
+      color: white;
+    }
+
+    .mpd-badge {
+      background-color: #059669;
+      color: white;
+    }
+
+    /* Stream Quality Info */
+    .quality-info {
+      font-size: 11px;
+      color: #60a5fa;
+      margin-top: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .quality-icon {
+      font-size: 12px;
+    }
+
     /* --- MATCH GROUP SEPARATORS --- */
     .match-group {
       margin: 25px 0 15px 0;
@@ -268,6 +319,41 @@
       background: rgba(255, 0, 0, 0.7);
     }
 
+    /* Stream Selector */
+    .stream-selector {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 8px 0;
+      flex-wrap: wrap;
+    }
+
+    .stream-btn {
+      padding: 6px 12px;
+      background: #374151;
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 12px;
+      cursor: pointer;
+      transition: background 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .stream-btn:hover {
+      background: #4b5563;
+    }
+
+    .stream-btn.active {
+      background: #3b82f6;
+    }
+
+    .stream-icon {
+      font-size: 14px;
+    }
+
     /* No matches message */
     .no-matches {
       text-align: center;
@@ -277,65 +363,6 @@
       background: #1e293b;
       border-radius: 10px;
       margin: 20px 0;
-    }
-
-    /* Toggle Switch for Show/Hide Completed */
-    .toggle-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 15px 0;
-      gap: 10px;
-    }
-
-    .toggle-switch {
-      position: relative;
-      display: inline-block;
-      width: 50px;
-      height: 24px;
-    }
-
-    .toggle-switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    .toggle-slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #ccc;
-      transition: .4s;
-      border-radius: 24px;
-    }
-
-    .toggle-slider:before {
-      position: absolute;
-      content: "";
-      height: 16px;
-      width: 16px;
-      left: 4px;
-      bottom: 4px;
-      background-color: white;
-      transition: .4s;
-      border-radius: 50%;
-    }
-
-    input:checked + .toggle-slider {
-      background-color: #38a169;
-    }
-
-    input:checked + .toggle-slider:before {
-      transform: translateX(26px);
-    }
-
-    .toggle-label {
-      font-size: 14px;
-      color: #ccc;
     }
 
     @media (max-width: 600px) {
@@ -372,6 +399,19 @@
         font-size: 10px;
         padding: 3px 8px;
       }
+      
+      .duration-info {
+        font-size: 10px;
+      }
+      
+      .stream-selector {
+        gap: 5px;
+      }
+      
+      .stream-btn {
+        padding: 4px 8px;
+        font-size: 10px;
+      }
     }
   </style>
 </head>
@@ -383,17 +423,6 @@
       <td width="50%"><a href="https://t.me/tv4wap" target="_blank">TV4WAP</a></td>
     </tr>
   </table>
-
-  <!-- Optional: Toggle to show completed matches (if you want to add later) -->
-  <!--
-  <div class="toggle-container">
-    <span class="toggle-label">Show Completed Matches</span>
-    <label class="toggle-switch">
-      <input type="checkbox" id="showCompletedToggle">
-      <span class="toggle-slider"></span>
-    </label>
-  </div>
-  -->
 
   <div id="loading-message">Loading match data...</div>
 
@@ -420,11 +449,10 @@
     // Status configuration - Only LIVE and UPCOMING
     const STATUS_CONFIG = {
       live: {
-        badgeClass: 'status-live',
-        icon: '🔴',
-        title: 'LIVE MATCHES',
-        timerColor: '#dc2626',
-        show: true
+        badgeClass:'live',
+        title: 'LIVE MATCHE',
+        icon:'🔴',
+        timerColor: '#dc2626'
       },
       upcoming: {
         badgeClass: 'status-upcoming',
@@ -432,13 +460,23 @@
         title: 'UPCOMING MATCHES',
         timerColor: 'gold',
         show: true
+      }
+    };
+
+    // Default duration if not specified in JSON
+    const DEFAULT_DURATION_HOURS = 8;
+
+    // Video player configuration
+    const PLAYER_CONFIG = {
+      m3u8: {
+        icon: '🎬',
+        badge: 'm3u8-badge',
+        name: 'M3U8'
       },
-      completed: {
-        badgeClass: 'status-completed',
-        icon: '✅',
-        title: 'COMPLETED MATCHES',
-        timerColor: '#10b981',
-        show: false  // Completed matches are hidden by default
+      mpd: {
+        icon: '📺',
+        badge: 'mpd-badge',
+        name: 'MPD'
       }
     };
 
@@ -460,8 +498,9 @@
   playerOverlay.style.display = 'block';
   document.body.style.overflow = 'hidden';
 }
-""
-
+    
+    
+    
     function closePlayer() {
       playerIframe.src = '';
       playerOverlay.style.display = 'none';
@@ -504,7 +543,8 @@
       }
     }
 
-    function formatTimeDifference(startTimeStr) {
+    // Format time difference with duration consideration
+    function formatTimeDifference(startTimeStr, durationHours = DEFAULT_DURATION_HOURS) {
       const matchTime = parseStartTime(startTimeStr);
       if (isNaN(matchTime)) return 'INVALID';
 
@@ -513,8 +553,8 @@
 
       if (difference < 0) {
         const hoursPassed = Math.abs(difference) / (1000 * 60 * 60);
-        // If match started more than 8 hours ago, consider it completed
-        if (hoursPassed > 8) {
+        // Use durationHours from JSON, fallback to default
+        if (hoursPassed > durationHours) {
           return 'COMPLETED';
         }
         return 'LIVE';
@@ -552,9 +592,40 @@
       return `${datePart}, ${time}`;
     }
 
-    // Determine match status
+    // Get video format from URL
+    function getVideoFormat(url) {
+      if (!url) return null;
+      
+      if (url.toLowerCase().endsWith('.m3u8') || url.includes('.m3u8?')) {
+        return 'm3u8';
+      } else if (url.toLowerCase().endsWith('.mpd') || url.includes('.mpd?')) {
+        return 'mpd';
+      }
+      return null;
+    }
+
+    // Get quality from URL or stream object
+    function getStreamQuality(stream) {
+      if (typeof stream === 'string') {
+        // If stream is a string URL, check for quality indicators
+        const url = stream.toLowerCase();
+        if (url.includes('1080')) return '1080p';
+        if (url.includes('720')) return '720p';
+        if (url.includes('480')) return '480p';
+        if (url.includes('360')) return '360p';
+        return 'HD';
+      } else if (stream && stream.quality) {
+        // If stream is an object with quality property
+        return stream.quality;
+      }
+      return 'Auto';
+    }
+
+    // Determine match status with duration
     function getMatchStatus(match) {
-      const timeDiff = formatTimeDifference(match.startTime);
+      // Get duration from match data, use default if not specified
+      const durationHours = match.durationHours || DEFAULT_DURATION_HOURS;
+      const timeDiff = formatTimeDifference(match.startTime, durationHours);
       
       if (timeDiff === 'LIVE') return 'live';
       if (timeDiff === 'COMPLETED') return 'completed';
@@ -586,12 +657,94 @@
       return groups;
     }
 
+    // Generate stream selector HTML
+    function generateStreamSelector(match) {
+      const streams = [];
+      
+      // Check for videoStreams array
+      if (match.videoStreams && Array.isArray(match.videoStreams)) {
+        match.videoStreams.forEach((stream, index) => {
+          if (typeof stream === 'string') {
+            streams.push({
+              url: stream,
+              format: getVideoFormat(stream),
+              quality: getStreamQuality(stream),
+              label: `Stream ${index + 1}`
+            });
+          } else if (stream && stream.url) {
+            streams.push({
+              url: stream.url,
+              format: getVideoFormat(stream.url),
+              quality: stream.quality || getStreamQuality(stream.url),
+              label: stream.label || `Stream ${index + 1}`
+            });
+          }
+        });
+      }
+      
+      // Check for single stream URL (backward compatibility)
+      if (match.streamUrl && !match.videoStreams) {
+        streams.push({
+          url: match.streamUrl,
+          format: getVideoFormat(match.streamUrl),
+          quality: getStreamQuality(match.streamUrl),
+          label: 'Main Stream'
+        });
+      }
+      
+      // Check for multiple stream formats (alternative structure)
+      if (match.m3u8) {
+        streams.push({
+          url: match.m3u8,
+          format: 'm3u8',
+          quality: getStreamQuality(match.m3u8),
+          label: 'M3U8 Stream'
+        });
+      }
+      
+      if (match.mpd) {
+        streams.push({
+          url: match.mpd,
+          format: 'mpd',
+          quality: getStreamQuality(match.mpd),
+          label: 'MPD Stream'
+        });
+      }
+      
+      if (streams.length === 0) {
+        return '';
+      }
+      
+      let html = '<div class="stream-selector">';
+      
+      streams.forEach((stream, index) => {
+        const config = PLAYER_CONFIG[stream.format] || { icon: '📡', name: 'Stream' };
+        const isActive = index === 0 ? 'active' : '';
+        
+        html += `
+          <button class="stream-btn ${isActive}" 
+                  onclick="openPlayer('${match.match_id}', '${stream.url}'); event.stopPropagation();"
+                  title="${stream.url}">
+            <span class="stream-icon">${config.icon}</span>
+            ${stream.label}
+            <span class="format-badge ${config.badge || ''}">${config.name}</span>
+          </button>
+        `;
+      });
+      
+      html += '</div>';
+      return html;
+    }
+
     // Generate match card HTML
     function generateMatchCard(match, status) {
       const team1_logo = match.src || DEFAULT_LOGO;
       const team2_logo = match.src_2 && match.src_2 !== 'Unavailable' ? match.src_2 : team1_logo;
       const isLive = status === 'live';
       const config = STATUS_CONFIG[status];
+      
+      // Get duration from match data or use default
+      const durationHours = match.durationHours || DEFAULT_DURATION_HOURS;
       
       const live_image = isLive ? getStatusImage('LIVE') : getStatusImage('UPCOMING');
       const formattedTime = formatStartTime(match.startTime);
@@ -600,14 +753,26 @@
       if (isLive) {
         timerText = 'LIVE NOW';
       } else {
-        const timeDiff = formatTimeDifference(match.startTime);
+        const timeDiff = formatTimeDifference(match.startTime, durationHours);
         timerText = `Starts in: ${timeDiff}`;
       }
       
+      // Generate stream selector if streams available
+      const streamSelectorHTML = generateStreamSelector(match);
+      
+      // Check if there are any streams
+      const hasStreams = streamSelectorHTML !== '';
+      
+      // Default click action
+      const clickAction = hasStreams 
+        ? ''  // No default click if there are stream selectors
+        : `onclick="openPlayer('${match.match_id}')"`;
+      
       return `
+       
+       
 <div class="match-card-item"
   onclick='openPlayer(${JSON.stringify(match)})'>
-          
           <div class="card">
             <div class="status-badge ${config.badgeClass}">
               ${config.icon} ${status.toUpperCase()}
@@ -634,6 +799,14 @@
               <p class="timer-display ${isLive ? 'live-timer' : ''}" id="timer-${match.match_id}" style="color: ${config.timerColor}">
                 ${timerText}
               </p>
+              
+              ${streamSelectorHTML}
+              
+              <div class="duration-info">
+                <span class="duration-icon">⏱️</span>
+                Match Duration: ${durationHours} hours
+                ${match.durationHours ? '' : '(Default)'}
+              </div>
             </div>
           </div>
         </div>
@@ -675,7 +848,7 @@
       loadingMessage.style.display = 'none';
     }
 
-    // Start countdown for upcoming matches
+    // Start countdown for upcoming matches with duration support
     function startCountdown() {
       if (countdownInterval) clearInterval(countdownInterval);
       
@@ -686,7 +859,8 @@
         allMatches.forEach(match => {
           const timerElement = document.getElementById(`timer-${match.match_id}`);
           if (timerElement) {
-            const timeDifference = formatTimeDifference(match.startTime);
+            const durationHours = match.durationHours || DEFAULT_DURATION_HOURS;
+            const timeDifference = formatTimeDifference(match.startTime, durationHours);
             const matchCard = timerElement.closest('.match-card-item');
             const currentStatus = matchCard ? matchCard.dataset.status : null;
             
@@ -728,6 +902,18 @@
         if (data && data.matches) {
           allMatches = data.matches;
           
+          // Log match info for debugging
+          console.log('Loaded matches with streams:');
+          allMatches.forEach((match, index) => {
+            const streams = [];
+            if (match.videoStreams) streams.push(`${match.videoStreams.length} streams`);
+            if (match.streamUrl) streams.push('streamUrl');
+            if (match.m3u8) streams.push('m3u8');
+            if (match.mpd) streams.push('mpd');
+            
+            console.log(`${index + 1}. ${match.title} - Duration: ${match.durationHours || DEFAULT_DURATION_HOURS}h - Streams: ${streams.join(', ') || 'None'}`);
+          });
+          
           // Filter and group matches (only live and upcoming)
           const groups = filterAndGroupMatches(allMatches);
           
@@ -752,20 +938,6 @@
     window.addEventListener('beforeunload', () => {
       if (countdownInterval) clearInterval(countdownInterval);
     });
-
-    // Optional: If you want to add toggle for completed matches later
-    /*
-    document.addEventListener('DOMContentLoaded', function() {
-      const toggle = document.getElementById('showCompletedToggle');
-      if (toggle) {
-        toggle.addEventListener('change', function() {
-          STATUS_CONFIG.completed.show = this.checked;
-          const groups = filterAndGroupMatches(allMatches);
-          displayLiveAndUpcomingMatches(groups);
-        });
-      }
-    });
-    */
   </script>
 </body>
 </html>
