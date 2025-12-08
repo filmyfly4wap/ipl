@@ -3,6 +3,7 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>TV4WAP LIVE4WAP - Smart Duration Matches</title>
   <style>
     /* CSS STYLES */
@@ -10,7 +11,7 @@
       margin: 0 16px 0 10px;
       padding: 0;
       font-family: Arial, Helvetica, sans-serif;
-      background-color: #121212;
+      background-color: #000;
       color: #E0E0E0;
     }
 
@@ -31,40 +32,6 @@
       color: #ccc;
     }
 
-    /* --- TELEGRAM BUTTONS --- */
-    .telegram-btn {
-      width: 100%;
-      margin: 10px 0;
-      border-collapse: collapse;
-    }
-
-    .telegram-btn td {
-      padding: 0;
-    }
-
-    .telegram-btn a {
-      display: block;
-      padding: 10px;
-      text-align: center;
-      font-weight: bold;
-      border-radius: 8px;
-      margin: 5px;
-      transition: background-color 0.3s;
-    }
-
-    .telegram-btn td:nth-child(1) a {
-      background-color: #2a6fdb;
-      color: white;
-    }
-
-    .telegram-btn td:nth-child(2) a {
-      background-color: #38a169;
-      color: white;
-    }
-
-    .telegram-btn a:hover {
-      opacity: 0.9;
-    }
 
     /* --- STATUS BADGE --- */
     .status-badge {
@@ -105,10 +72,10 @@
     }
 
     .card {
-      background: #1e293b;
+      background: #111111;
       padding: 16px;
       border-radius: 12px;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
       transition: background-color 0.2s, transform 0.2s;
       width: 100%;
       box-sizing: border-box;
@@ -116,7 +83,7 @@
     }
 
     .card:hover {
-      background-color: #2b4566;
+      background-color: #202020;
       transform: translateY(-2px);
     }
 
@@ -371,17 +338,34 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      margin-top: 8px;
     }
 
     .open-site-btn:hover {
       background: linear-gradient(90deg, #2962ff, #fff 70%);
-      color: #000;
       transform: translateY(-2px);
       opacity: 0.95;
     }
 
     .open-site-btn .link-icon {
       font-size: 14px;
+    }
+
+    .open-site-btn.hidden {
+      display: none !important;
+    }
+
+    /* Error Message */
+    .error-message {
+      color: #ff6b6b;
+      font-size: 12px;
+      margin-top: 5px;
+      text-align: center;
+      display: none;
+      background: rgba(255, 107, 107, 0.1);
+      padding: 5px;
+      border-radius: 5px;
+      border: 1px solid rgba(255, 107, 107, 0.3);
     }
 
     /* No matches message */
@@ -447,12 +431,7 @@
 </head>
 
 <body>
-  <table class="telegram-btn">
-    <tr>
-      <td width="50%"><a href="https://t.me/tvgotk" target="_blank">LIVE4WAP</a></td>
-      <td width="50%"><a href="https://t.me/tv4wap" target="_blank">TV4WAP</a></td>
-    </tr>
-  </table>
+
 
   <div id="loading-message">Loading match data...</div>
 
@@ -479,14 +458,15 @@
     // Status configuration - Only LIVE and UPCOMING
     const STATUS_CONFIG = {
       live: {
-        badgeClass:'live',
-        title: 'LIVE MATCHE',
-        icon:'🔴',
+        badgeClass:'status-live',
+        title: 'LIVE MATCHES',
+        
+        icon:'<i class="fa fa-circle"></i>',
         timerColor: '#dc2626'
       },
       upcoming: {
         badgeClass: 'status-upcoming',
-        icon: '⏳',
+        icon: '<i class="fa fa-hourglass-half"></i>',
         title: 'UPCOMING MATCHES',
         timerColor: 'gold',
         show: true
@@ -535,28 +515,45 @@
       document.body.style.overflow = '';
     }
 
-    // Card click handler: if URL present open it, otherwise fallback to openPlayer with match object
-    function cardClick(url, matchObj) {
-      try {
-        if (url && String(url).trim().length > 0) {
-          // open in new tab
-          window.open(String(url), '_blank', 'noopener,noreferrer');
-          return;
+    // Modified card click handler
+    function cardClick(match, status) {
+      // For upcoming matches, show error message
+      if (status === 'upcoming') {
+        const errorElement = document.getElementById(`error-${match.match_id}`);
+        if (errorElement) {
+          errorElement.style.display = 'block';
+          errorElement.textContent = 'Match is not live yet! Please wait for the match to start.';
+          
+          // Hide error after 3 seconds
+          setTimeout(() => {
+            errorElement.style.display = 'none';
+          }, 3000);
         }
-      } catch (e) {
-        console.error('Error opening URL from cardClick:', e);
+        return;
       }
-      // fallback: open player if provided match object
-      if (matchObj) {
-        openPlayer(matchObj);
+      
+      // For live matches, open the button URL if available
+      if (status === 'live' && match.button) {
+        try {
+          const url = String(match.button).trim();
+          if (url && url.length > 0) {
+            window.open(url, '_blank', 'noopener,noreferrer');
+            return;
+          }
+        } catch (e) {
+          console.error('Error opening URL from cardClick:', e);
+        }
       }
+      
+      // Fallback: open player
+      openPlayer(match);
     }
     
     function getStatusImage(status) {
       return (status && status.toUpperCase() === 'LIVE') ?
         'https://media.tenor.com/33gJyOCSrIYAAAAj/live.gif' :
         'https://media.tenor.com/7b7fQh48y08AAAAj/vs-versus.gif';
-    }
+}
 
     function parseStartTime(startTimeStr) {
       try {
@@ -768,7 +765,7 @@
         
         html += `
           <button class="stream-btn ${isActive}" 
-                  onclick="openPlayer('${match.match_id}', '${stream.url}'); event.stopPropagation();"
+                  onclick="openPlayer(${JSON.stringify(match)}); event.stopPropagation();"
                   title="${stream.url}">
             <span class="stream-icon">${config.icon}</span>
             ${stream.label}
@@ -808,29 +805,25 @@
       // Check if there are any streams
       const hasStreams = streamSelectorHTML !== '';
       
-      // Prepare button HTML if match.button exists
+      // Generate button HTML only for live matches
       let buttonHTML = '';
-      if (match.button) {
+      if (match.button && isLive) {
         const url = String(match.button).trim();
         if (url.length > 0) {
           buttonHTML = `
-            <div style="text-align:center;margin-top:8px;">
+            <div style="text-align:center;">
               <a href="${url}" target="_blank" rel="noopener noreferrer" class="open-site-btn" onclick="event.stopPropagation();">
-                <span class="link-icon">🔗</span>
-                OPEN SITE
+                <span class="link-icon"><i class="fa fa-play"></i> </span>
+                Watch Now
               </a>
             </div>
           `;
         }
       }
       
-      // The card's onclick will open the button URL if present, otherwise fallback to openPlayer(match)
-      const buttonUrlForClick = match.button ? JSON.stringify(String(match.button)) : "''";
-      const matchJsonForClick = JSON.stringify(match).replace(/'/g, "\\'");
-      
       return `
         <div class="match-card-item"
-             onclick='cardClick(${buttonUrlForClick}, ${JSON.stringify(match)})'>
+             onclick="cardClickById('${match.match_id}', '${status}')"">
           <div class="card">
             <div class="status-badge ${config.badgeClass}">
               ${config.icon} ${status.toUpperCase()}
@@ -840,14 +833,14 @@
             
             <div class="card-des">
               <div class="team-container">
-                <img alt="${match.team_1}" class="t1" src="${team1_logo}">
+                <img alt="${match.team_1}" class="t1" src="${team1_logo}" onerror="this.src='${DEFAULT_LOGO}'">
                 <div class="team-name">${match.team_1}</div>
               </div>
               
               <img alt="${match.status}" class="vs" src="${live_image}">
               
               <div class="team-container">
-                <img alt="${match.team_2}" class="t2" src="${team2_logo}">
+                <img alt="${match.team_2}" class="t2" src="${team2_logo}" onerror="this.src='${DEFAULT_LOGO}'">
                 <div class="team-name">${match.team_2}</div>
               </div>
             </div>
@@ -862,11 +855,9 @@
               
               ${buttonHTML}
               
-              <div class="duration-info">
-                <span class="duration-icon">⏱️</span>
-                Match Duration: ${durationHours} hours
-                ${match.durationHours ? '' : '(Default)'}
-              </div>
+              <div class="error-message" id="error-${match.match_id}"></div>
+              
+
             </div>
           </div>
         </div>
@@ -921,14 +912,20 @@
           if (timerElement) {
             const durationHours = match.durationHours || DEFAULT_DURATION_HOURS;
             const timeDifference = formatTimeDifference(match.startTime, durationHours);
-            const matchCard = timerElement.closest('.match-card-item');
-            const currentStatus = matchCard ? matchCard.dataset.status : null;
             
-            if (timeDifference === 'LIVE' && currentStatus !== 'live') {
+            // Check if status changed from upcoming to live
+            if (timeDifference === 'LIVE') {
+              // Check if match is currently shown as upcoming
+              const matchGroup = timerElement.closest('.match-group');
+              if (matchGroup && matchGroup.dataset.status === 'upcoming') {
+                needsUpdate = true;
+              }
+            }
+            
+            if (timeDifference === 'LIVE') {
               timerElement.textContent = 'LIVE NOW';
               timerElement.style.color = STATUS_CONFIG.live.timerColor;
               timerElement.classList.add('live-timer');
-              needsUpdate = true;
             } else if (timeDifference === 'COMPLETED') {
               // If match becomes completed, it will be removed on next update
               needsUpdate = true;
@@ -971,7 +968,7 @@
             if (match.m3u8) streams.push('m3u8');
             if (match.mpd) streams.push('mpd');
             
-            console.log(`${index + 1}. ${match.title} - Duration: ${match.durationHours || DEFAULT_DURATION_HOURS}h - Streams: ${streams.join(', ') || 'None'}`);
+            console.log(`${index + 1}. ${match.title} - Duration: ${match.durationHours || DEFAULT_DURATION_HOURS}h - Streams: ${streams.join(', ') || 'None'} - Button: ${match.button ? 'Yes' : 'No'}`);
           });
           
           // Filter and group matches (only live and upcoming)
@@ -996,8 +993,41 @@
 
     // Cleanup on page unload
     window.addEventListener('beforeunload', () => {
-      if (countdownInterval) clearInterval(countdownInterval);
+      if (countdownInterval)   clearInterval(countdownInterval);
     });
+    
+    
+    
+  function getMatchById(matchId) {
+    return allMatches.find(m => String(m.match_id) === String(matchId));
+  }
+
+
+  function cardClickById(matchId, status) {
+    const match = getMatchById(matchId);
+    if (!match) return;
+
+    // ✅ Upcoming match → ERROR ALERT
+    if (status === 'upcoming') {
+      alert('Match is not live yet! Please wait for the match to start.');
+      return;
+    }
+
+    // ✅ Live match → Button URL OPEN
+    if (status === 'live' && match.button) {
+      const url = String(match.button).trim();
+      if (url) {
+        window.open(url, '_blank', 'noopener,noreferrer');
+        return;
+      }
+    }
+
+    // ✅ Fallback → Player open
+    openPlayer(match);
+  }
+
+
+
   </script>
 </body>
 </html>
