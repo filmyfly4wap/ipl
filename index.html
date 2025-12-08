@@ -354,6 +354,36 @@
       font-size: 14px;
     }
 
+    /* --- OPEN SITE BUTTON (styled) --- */
+    .open-site-btn {
+      display: inline-block;
+      background: linear-gradient(90deg, #fff, #2962ff 70%);
+      color: #000;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 7px;
+      border: none;
+      text-decoration: none;
+      font-size: 13px;
+      box-shadow: 0 6px 18px rgba(175, 0, 45, 0.25);
+      transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .open-site-btn:hover {
+      background: linear-gradient(90deg, #2962ff, #fff 70%);
+      color: #000;
+      transform: translateY(-2px);
+      opacity: 0.95;
+    }
+
+    .open-site-btn .link-icon {
+      font-size: 14px;
+    }
+
     /* No matches message */
     .no-matches {
       text-align: center;
@@ -482,24 +512,22 @@
 
     // --- Player Control Functions ---
     function openPlayer(match) {
-  const streamURL =
-    match.adfree_url ||
-    match.dai_url ||
-    match.m3u8 ||
-    match.mpd ||
-    "";
+      const streamURL =
+        match.adfree_url ||
+        match.dai_url ||
+        match.m3u8 ||
+        match.mpd ||
+        "";
 
-  if (!streamURL) {
-    alert("Stream URL not available");
-    return;
-  }
+      if (!streamURL) {
+        alert("Stream URL not available");
+        return;
+      }
 
-  playerIframe.src = streamURL;
-  playerOverlay.style.display = 'block';
-  document.body.style.overflow = 'hidden';
-}
-    
-    
+      playerIframe.src = streamURL;
+      playerOverlay.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
     
     function closePlayer() {
       playerIframe.src = '';
@@ -507,6 +535,23 @@
       document.body.style.overflow = '';
     }
 
+    // Card click handler: if URL present open it, otherwise fallback to openPlayer with match object
+    function cardClick(url, matchObj) {
+      try {
+        if (url && String(url).trim().length > 0) {
+          // open in new tab
+          window.open(String(url), '_blank', 'noopener,noreferrer');
+          return;
+        }
+      } catch (e) {
+        console.error('Error opening URL from cardClick:', e);
+      }
+      // fallback: open player if provided match object
+      if (matchObj) {
+        openPlayer(matchObj);
+      }
+    }
+    
     function getStatusImage(status) {
       return (status && status.toUpperCase() === 'LIVE') ?
         'https://media.tenor.com/33gJyOCSrIYAAAAj/live.gif' :
@@ -763,16 +808,29 @@
       // Check if there are any streams
       const hasStreams = streamSelectorHTML !== '';
       
-      // Default click action
-      const clickAction = hasStreams 
-        ? ''  // No default click if there are stream selectors
-        : `onclick="openPlayer('${match.match_id}')"`;
+      // Prepare button HTML if match.button exists
+      let buttonHTML = '';
+      if (match.button) {
+        const url = String(match.button).trim();
+        if (url.length > 0) {
+          buttonHTML = `
+            <div style="text-align:center;margin-top:8px;">
+              <a href="${url}" target="_blank" rel="noopener noreferrer" class="open-site-btn" onclick="event.stopPropagation();">
+                <span class="link-icon">🔗</span>
+                OPEN SITE
+              </a>
+            </div>
+          `;
+        }
+      }
+      
+      // The card's onclick will open the button URL if present, otherwise fallback to openPlayer(match)
+      const buttonUrlForClick = match.button ? JSON.stringify(String(match.button)) : "''";
+      const matchJsonForClick = JSON.stringify(match).replace(/'/g, "\\'");
       
       return `
-       
-       
-<div class="match-card-item"
-  onclick='openPlayer(${JSON.stringify(match)})'>
+        <div class="match-card-item"
+             onclick='cardClick(${buttonUrlForClick}, ${JSON.stringify(match)})'>
           <div class="card">
             <div class="status-badge ${config.badgeClass}">
               ${config.icon} ${status.toUpperCase()}
@@ -801,6 +859,8 @@
               </p>
               
               ${streamSelectorHTML}
+              
+              ${buttonHTML}
               
               <div class="duration-info">
                 <span class="duration-icon">⏱️</span>
