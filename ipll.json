@@ -1,5 +1,20 @@
 {
   "name": " Live Matches",
+
+      "slider": [
+    {
+      "img": " https://i.postimg.cc/vTbcxmF9/IMG-20251216-WA0013.jpg",
+      "link": "https://filmyfly4wap.github.io/player/ilt20.html "
+    },
+    {
+      "img": "https://i.postimg.cc/1XsfVzhF/IMG-20251216-WA0015.jpg",
+      "link": "https://youtube.com"
+    },
+    {
+      "img": "https://i.postimg.cc/FzN7kK5J/IMG-20251216-WA0016.jpg",
+      "link": "https://telegram.org"
+    }
+  ],
   
   "matches": [
     
