@@ -1,118 +1,184 @@
 {
   "name": " Live Matches",
   
+  
+  
+"slider": [
+  
+  {
+    "img": "https://i.postimg.cc/wMvX11xG/wp.jpg",
+    "link": " https://whatsapp.com/channel/0029VbBopnM4Y9lqDP2PsL08",
+    "startTime": "7:00:00 PM 19-12-2025", 
+    "durationHours": 5
+  }
+],  
+
+
   "matches": [
+    
+    
     
     
     
     
     {
       "match_id": 1,
-      "title": "1st T20I • Cuttack, Barabati Stadium",
+      "title": " 1st ODI • Vadodara, BCA Stadium, Kotambi",
       "src": "https://flagcdn.com/in.svg ",
-      "src_2": "https://flagcdn.com/za.svg ",
-      "team_1": "India",
-      "team_2": " South Africa ",
+      "src_2": "https://flagcdn.com/nz.svg ",
+      "team_1": " India",
+      "team_2": "  New Zealand ",
       "status": "UPCOMING",
-      "startTime": "07:00:00 PM 09-12-2025",
-      "durationHours": 10,
-      "button": "https://filmyfly4wap.github.io/ipl/play.html "
+      "startTime": "11:30:00 PM 11-01-2026",
+      "durationHours": 5,
+      "button": " "
     },
     
     {
       "match_id": 2,
-      "title": "2nd T20I • New Chandigarh, Maharaja Yadavindra Singh International Cricket Stadium, Mullanpur",
-      "src": "https://flagcdn.com/in.svg ",
-      "src_2": "https://flagcdn.com/za.svg ",
-      "team_1": "India",
-      "team_2": " South Africa ",
+      "title": " 2nd ODI • Rajkot, Niranjan Shah Stadium, Khandheri ",
+      "src": " https://flagcdn.com/in.svg",
+      "src_2": "https://flagcdn.com/nz.svg ",
+      "team_1": " india",
+      "team_2": " New Zealand  ",
       "status": "UPCOMING",
-      "startTime": "07:00:00 PM 11-12-2025",
-      "durationHours": 4,
-      "button": " https://dillzyishere.vercel.app/player2.html?id=dillzy745"
+      "startTime": "01:30:00 PM 14-01-2025",
+      "durationHours": 5,
+      "button": " "
     },
     
     {
       "match_id": 3,
-      "title": "3rd T20I • Dharamsala, Himachal Pradesh Cricket Association Stadium",
-      "src": "https://flagcdn.com/in.svg ",
-      "src_2": "https://flagcdn.com/za.svg ",
-      "team_1": "India",
-      "team_2": " South Africa ",
+      "title": "3rd ODI • Indore, Holkar Cricket Stadium ",
+      "src": " https://flagcdn.com/in.svg",
+      "src_2": " https://flagcdn.com/nz.svg",
+      "team_1": " India",
+      "team_2": "  New Zealand ",
       "status": "UPCOMING",
-      "startTime": "07:00:00 PM 14-12-2025",
-      "durationHours": 4,
-      "button": " https://filmyfly4wap.github.io/ipl/play.html"
+      "startTime": "01:30:00 PM 18-01-2026",
+      "durationHours": 5,
+      "button": " "
     },
     
     {
       "match_id": 4,
-      "title": "4th T20I • Lucknow, Bharat Ratna Shri Atal Bihari Vajpayee Ekana Cricket Stadium",
-      "src": "https://flagcdn.com/in.svg ",
-      "src_2": "https://flagcdn.com/za.svg ",
-      "team_1": "India",
-      "team_2": " South Africa ",
+      "title": "1st T20I • Nagpur, Vidarbha Cricket Association Stadium ",
+      "src": " https://flagcdn.com/in.svg",
+      "src_2": " https://flagcdn.com/nz.svg",
+      "team_1": " India",
+      "team_2": "  New Zealand ",
       "status": "UPCOMING",
-      "startTime": "07:00:00 PM 17-12-2025",
-      "durationHours": 4,
-      "button": " https://filmyfly4wap.github.io/ipl/play.html"
+      "startTime": "07:00:00 PM 21-01-2026",
+      "durationHours": 5,
+      "button": " "
     },
     
     {
       "match_id": 5,
-      "title": "5th T20I • Ahmedabad, Narendra Modi Stadium",
+      "title": "2nd T20I • Raipur, Shaheed Veer Narayan Singh International Stadium ",
+      "src": " https://flagcdn.com/in.svg",
+      "src_2": "https://flagcdn.com/nz.svg ",
+      "team_1": " India",
+      "team_2": "  new Zealand ",
+      "status": "UPCOMING",
+      "startTime": "08:00:00 PM 23-01-2026",
+      "durationHours": 5,
+      "button": " "
+    },
+    
+    {
+      "match_id": 6,
+      "title": "3rd T20I • Guwahati, Barsapara Cricket Stadium ",
       "src": "https://flagcdn.com/in.svg ",
-      "src_2": "https://flagcdn.com/za.svg ",
-      "team_1": "India",
-      "team_2": " South Africa ",
+      "src_2": "https://flagcdn.com/nz.svg ",
+      "team_1": "India ",
+      "team_2": "  New Zealand ",
       "status": "UPCOMING",
-      "startTime": "07:00:00 PM 19-12-2025",
-      "durationHours": 4,
-      "button": "https://filmyfly4wap.github.io/ipl/play.html "
+      "startTime": "07:00:00 PM 25-01-2026",
+      "durationHours": 5,
+      "button": " "
     },
     
     {
-      "match_id": 3,
-      "title": "3rd Test • Adelaide, Adelaide Oval",
-      "src": "https://flagcdn.com/au.svg ",
-      "src_2": "https://flagcdn.com/gb-eng.svg ",
-      "team_1": "Australia",
-      "team_2": " England ",
+      "match_id": 7,
+      "title": "4th T20I • Visakhapatnam, ACA-VDCA Cricket Stadium ",
+      "src": " https://flagcdn.com/in.svg",
+      "src_2": "https://flagcdn.com/nz.svg ",
+      "team_1": " india",
+      "team_2": "  New Zealand ",
       "status": "UPCOMING",
-      "startTime": "05:30:00 AM 17-12-2025",
-      "durationHours": 8,
-      "button": " https://filmyfly4wap.github.io/ipl/play.html"
+      "startTime": "07:00:00 PM 28-01-2026",
+      "durationHours": 5,
+      "button": " "
     },
     
     {
-      "match_id": 4,
-      "title": "4th Test • Melbourne, Melbourne Cricket Ground",
-      "src": "https://flagcdn.com/au.svg ",
-      "src_2": "https://flagcdn.com/gb-eng.svg ",
-      "team_1": "Australia",
-      "team_2": " England ",
+      "match_id": 8,
+      "title": "5th T20I • Thiruvananthapuram, Greenfield International Stadium ",
+      "src": " https://flagcdn.com/in.svg",
+      "src_2": " https://flagcdn.com/nz.svg",
+      "team_1": " India",
+      "team_2": "  New Zealand ",
       "status": "UPCOMING",
-      "startTime": "05:30:00 AM 26-12-2025",
-      "durationHours": 8,
-      "button": "https://filmyfly4wap.github.io/ipl/play.html "
+      "startTime": "07:00:00 PM 31-01-2026",
+      "durationHours": 5,
+      "button": " "
+    },
+    
+    
+    
+    
+    {
+      "match_id": 9,
+      "title": "3rd Match, Group A • Mumbai, Wankhede Stadium",
+      "src": " https://flagcdn.com/in.svg",
+      "src_2": " https://flagcdn.com/us.svg",
+      "team_1": " India",
+      "team_2": " United States of America   ",
+      "status": "UPCOMING",
+      "startTime": "07:00:00 PM 07-02-2025",
+      "durationHours": 5,
+      "button": " "
     },
     
     {
-      "match_id": 5,
-      "title": "5th Test • Sydney, Sydney Cricket Ground",
-      "src": "https://flagcdn.com/au.svg ",
-      "src_2": "https://flagcdn.com/gb-eng.svg ",
-      "team_1": "Australia",
-      "team_2": " England ",
+      "match_id": 10,
+      "title": " 18th Match, Group A • Delhi, Arun Jaitley Stadium",
+      "src": "https://flagcdn.com/in.svg ",
+      "src_2": " https://flagcdn.com/na.svg",
+      "team_1": " India",
+      "team_2": "  Namibia ",
       "status": "UPCOMING",
-      "startTime": "05:30:00 AM 04-01-2026",
-      "durationHours": 8,
-      "button": " https://filmyfly4wap.github.io/ipl/play.html"
+      "startTime": "07:00:00 PM 12-02-2026",
+      "durationHours": 5,
+      "button": " "
+    },
+    
+    {
+      "match_id": 11,
+      "title": " 27th Match, Group A • Colombo, R.Premadasa Stadium ",
+      "src": " https://flagcdn.com/in.svg",
+      "src_2": " https://flagcdn.com/pk.svg",
+      "team_1": " india",
+      "team_2": " Pakistan  ",
+      "status": "UPCOMING",
+      "startTime": "07:00:00 PM 15-12-2026",
+      "durationHours": 5,
+      "button": " "
+    },
+    
+    {
+      "match_id": 12,
+      "title": "36th Match, Group A • Ahmedabad, Narendra Modi Stadium ",
+      "src": " https://flagcdn.com/in.svg",
+      "src_2": " https://flagcdn.com/nl.svg",
+      "team_1": " ",
+      "team_2": "   ",
+      "status": "UPCOMING",
+      "startTime": "08:00:00 PM 18-02-2026",
+      "durationHours": 5,
+      "button": " "
     }
-    
-    
-    
-    
     
     
   ]
