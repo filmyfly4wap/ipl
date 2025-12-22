@@ -5,11 +5,26 @@
   
 "slider": [
   
+    {
+    "img": " ",
+    "link": " ",
+    "startTime": "7:00:00 PM 19-12-2025", 
+    "durationHours": 5
+  },
+  
+  
   {
-    "img": "https://i.postimg.cc/wMvX11xG/wp.jpg",
-    "link": " https://whatsapp.com/channel/0029VbBopnM4Y9lqDP2PsL08"
-    
-  }
+  "img": " https://i.postimg.cc/5yBRM5Vg/movie.png",
+  "link": " https://filmyfly4wap.site/page-movie.html"
+  
+},
+
+{
+  
+  "img": "https://i.postimg.cc/W3CsyVyp/Whats-App.png",
+  "link": " https://whatsapp.com/channel/0029VbBopnM4Y9lqDP2PsL08"
+  
+}
 ],  
 
 
