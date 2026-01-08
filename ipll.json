@@ -8,7 +8,19 @@
   
   "slider": [
     
+    {
+      "img": " ",
+      "link": " ",
+      "startTime": " ",
+      "durationHours": 5
+    },
     
+     {
+      "img": " ",
+      "link": " ",
+      "startTime": " ",
+      "durationHours": 5
+    },
     
     {
       "img": " https://i.postimg.cc/5yBRM5Vg/movie.png",
@@ -50,7 +62,7 @@
       "team_1": "GG  ",
       "team_2": " UPW",
       "status": "UPCOMING",
-      "startTime": " 03:30:00 PM 09- 10-2026 ",
+      "startTime": " 03:30:00 PM 09-10-2026 ",
       "durationHours": 5,
       "button": "https://filmyfly4wap.github.io/player/wpl.html"
       
