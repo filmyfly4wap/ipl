@@ -28,10 +28,10 @@
 
 
 "categories": [
-    
-    { "id": "INDvsNZ", "title": "IND vs NZ" },
+    { "id": "ALL", "title": "ALL" },
+    { "id": "INDvsNZ", "title": "INDvsNZ" },
     { "id": "WPL", "title": "WPL" },
-    { "id": "T20", "title": "T20 World Cup 2026" }
+    { "id": "T20", "title": "T20" }
   ],
 
 
@@ -987,7 +987,7 @@
       "team_1": "GG Women",
       "team_2": " UPW Women",
       "status": "UPCOMING",
-      "startTime": "03:30:00 PM 09-10-2026",
+      "startTime": "03:30:00 PM 09-01-2026",
       "durationHours": 5,
       "button": "https://filmyfly4wap.github.io/player/wpl.html"
       
