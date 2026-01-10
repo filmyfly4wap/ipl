@@ -5,8 +5,8 @@
   
   {
     "img": "https://pix1.wapkizfile.info/uploads/2026-01-10/img_6962132ccf6647.23518872.jpg",
-    "link": "https://filmyfly4wap.github.io/ipl/play.html",
-    "startTime": "3:30:00 PM 10-01-2026", 
+    "link": "https://filmyfly4wap.github.io/player/wpl.html",
+    "startTime": "3:00:00 PM 10-01-2026", 
     "durationHours": 5
   },
   
@@ -1005,9 +1005,9 @@
       "team_1": "GG Women",
       "team_2": " UPW Women",
       "status": "UPCOMING",
-      "startTime": "03:30:00 PM 10-01-2026",
+      "startTime": "03:00:00 PM 10-01-2026",
       "durationHours": 5,
-      "button": "https://filmyfly4wap.github.io/ipl/play.html"
+      "button": "https://filmyfly4wap.github.io/player/wpl.html"
       
     },
     
