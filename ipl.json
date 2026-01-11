@@ -47,9 +47,9 @@
 
 "categories": [
     
-    { "id": "INDvsNZ", "title": "INDvsNZ" },
+    { "id": "INDvsNZ", "title": "IND vs NZ" },
     { "id": "WPL", "title": "WPL" },
-    { "id": "T20", "title": "T20" }
+    { "id": "T20", "title": "T20 World Cup" }
   ],
 
 
@@ -878,7 +878,7 @@
       "team_1": " India",
       "team_2": "  New Zealand ",
       "status": "UPCOMING",
-      "startTime": "11:30:00 PM 11-01-2026",
+      "startTime": "01:30:00 PM 11-01-2026",
       "durationHours": 8,
       "button": " https://filmyfly4wap.github.io/player/INDvsNZ.html"
     },
