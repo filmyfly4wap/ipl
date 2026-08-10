@@ -13,7 +13,7 @@
   <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/shaka-player@4.16.2/dist/controls.css">
   
-  <!-- Font Awesome for Sun, Volume Speaker, & Double-Tap Icons -->
+  <!-- Font Awesome Icons for YouTube Style Arrows -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
@@ -260,7 +260,7 @@
     }
 
     .vertical-hud i {
-      font-size: 20px;
+      font-size: 15px;
       color: #ffffff;
       filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
     }
@@ -286,33 +286,59 @@
       transition: height 0.05s ease-out;
     }
 
-    /* Double Tap Seek Indicator (Left & Right) */
-    .seek-indicator {
+    /* YouTube Style Double Tap Seek Overlay */
+    .youtube-seek-hud {
       position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0, 0, 0, 0.65);
-      color: white;
-      padding: 18px 24px;
-      border-radius: 50px;
-      font-size: 14px;
-      font-weight: 600;
+      top: 0;
+      bottom: 0;
+      width: 40%;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.12);
       z-index: 100;
       pointer-events: none;
-      display: none;
-      align-items: center;
-      gap: 8px;
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      color: #ffffff;
+      gap: 6px;
     }
 
     #seek-left {
-      left: 12%;
+      left: 0;
+      border-radius: 0 100% 100% 0 / 0 50% 50% 0;
     }
 
     #seek-right {
-      right: 12%;
+      right: 0;
+      border-radius: 100% 0 0 100% / 50% 0 0 50%;
+    }
+
+    .yt-arrows {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 16px;
+    }
+
+    /* Animated Tripple Arrows */
+    .yt-arrows i {
+      animation: ytArrowFade 0.8s infinite ease-in-out;
+    }
+
+    .yt-arrows i:nth-child(1) { animation-delay: 0s; }
+    .yt-arrows i:nth-child(2) { animation-delay: 0.15s; }
+    .yt-arrows i:nth-child(3) { animation-delay: 0.3s; }
+
+    @keyframes ytArrowFade {
+      0%, 100% { opacity: 0.3; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.15); }
+    }
+
+    .yt-seek-text {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
     }
 
     #floating-lock-btn {
@@ -343,7 +369,7 @@
     #floating-lock-btn svg {
       width: 22px;
       height: 22px;
-      fill: #f87171;
+      fill: #fff;
     }
 
     .controls-locked .shaka-controls-container {
@@ -396,7 +422,7 @@
   <div id="pc">
     <div id="brightness-overlay"></div>
     
-    <!-- Vertical Brightness HUD (Khada Bar) -->
+    <!-- Vertical Brightness HUD -->
     <div id="hud-brightness" class="vertical-hud">
       <i class="fa-regular fa-sun"></i>
       <div class="hud-vertical-bar">
@@ -404,7 +430,7 @@
       </div>
     </div>
 
-    <!-- Vertical Volume HUD (Khada Bar) -->
+    <!-- Vertical Volume HUD -->
     <div id="hud-volume" class="vertical-hud">
       <i id="hud-vol-icon" class="fa-solid fa-volume-high"></i>
       <div class="hud-vertical-bar">
@@ -412,9 +438,24 @@
       </div>
     </div>
 
-    <!-- Double Tap Seek Indicators -->
-    <div id="seek-left" class="seek-indicator"><i class="fa-solid fa-rotate-left"></i> <span id="seek-left-text">10s</span></div>
-    <div id="seek-right" class="seek-indicator"><i class="fa-solid fa-rotate-right"></i> <span id="seek-right-text">10s</span></div>
+    <!-- YouTube Style Double Tap Seek Indicators with Animated Arrows -->
+    <div id="seek-left" class="youtube-seek-hud">
+      <div class="yt-arrows">
+        <i class="fa-solid fa-chevron-left"></i>
+        <i class="fa-solid fa-chevron-left"></i>
+        <i class="fa-solid fa-chevron-left"></i>
+      </div>
+      <span id="seek-left-text" class="yt-seek-text">10 seconds</span>
+    </div>
+
+    <div id="seek-right" class="youtube-seek-hud">
+      <div class="yt-arrows">
+        <i class="fa-solid fa-chevron-right"></i>
+        <i class="fa-solid fa-chevron-right"></i>
+        <i class="fa-solid fa-chevron-right"></i>
+      </div>
+      <span id="seek-right-text" class="yt-seek-text">10 seconds</span>
+    </div>
 
     <div id="floating-lock-btn">
       <svg viewBox="0 0 24 24">
@@ -530,7 +571,7 @@
 
         function updateVolumeHUD(val) {
           var p = Math.round(val * 100);
-          var fillHeight = Math.min((val / 2) * 100, 100); // 200% boost scale mapping
+          var fillHeight = Math.min((val / 2) * 100, 100);
 
           if (hudVolFill) hudVolFill.style.height = fillHeight + "%";
 
@@ -562,7 +603,7 @@
           if (otherEl) otherEl.style.display = "none";
 
           if (targetEl && targetText) {
-            targetText.textContent = seconds + "s";
+            targetText.textContent = seconds + " seconds";
             targetEl.style.display = "flex";
           }
         }
