@@ -238,7 +238,7 @@
       z-index: 30;
     }
 
-    /* Vertical Gestures HUD */
+    /* Vertical Gestures HUD (Khada Bar) */
     .vertical-hud {
       position: absolute;
       top: 50%;
@@ -265,6 +265,7 @@
       filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
     }
 
+    /* Vertical Progress Bar Container */
     .hud-vertical-bar {
       width: 4px;
       height: 130px;
@@ -318,6 +319,7 @@
       font-size: 16px;
     }
 
+    /* Animated Triple Arrows */
     .yt-arrows i {
       animation: ytArrowFade 0.8s infinite ease-in-out;
     }
@@ -338,7 +340,7 @@
       text-shadow: 0 2px 4px rgba(0,0,0,0.8);
     }
 
-    /* Animated Entry Lock Container */
+    /* Animated Entry Lock Container (Zoom In / Bounce Animation on Tap) */
     #floating-lock-container {
       position: absolute;
       left: max(16px, env(safe-area-inset-left));
@@ -353,12 +355,14 @@
       transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
+    /* Tap Par Show Animation */
     #floating-lock-container.show {
       opacity: 1;
       pointer-events: auto;
       transform: scale(1) translateY(0);
     }
 
+    /* Side Text Label */
     .lock-side-label {
       background: rgba(15, 23, 42, 0.88);
       border: 1px solid rgba(41, 98, 255, 0.6);
@@ -374,6 +378,7 @@
       white-space: nowrap;
     }
 
+    /* Animated Floating Lock Button */
     #floating-lock-btn {
       width: clamp(42px, 5.5vw, 54px);
       height: clamp(42px, 5.5vw, 54px);
@@ -412,7 +417,7 @@
       filter: drop-shadow(0 0 4px rgba(41, 98, 255, 0.8));
     }
 
-    /* OTT Tabbed Settings Modal with Directional Slide Transitions */
+    /* OTT / JioCinema Style Tabbed Settings Modal */
     .ott-settings-modal {
       position: absolute;
       inset: 0;
@@ -420,19 +425,16 @@
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       z-index: 10008;
-      display: flex;
+      display: none;
       align-items: center;
       justify-content: center;
       opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease, visibility 0.3s;
-      visibility: hidden;
+      transition: opacity 0.25s ease;
     }
 
     .ott-settings-modal.show {
+      display: flex;
       opacity: 1;
-      pointer-events: auto;
-      visibility: visible;
     }
 
     .ott-settings-box {
@@ -446,14 +448,9 @@
       overflow: hidden;
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
       position: relative;
-      transform: scale(0.95);
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .ott-settings-modal.show .ott-settings-box {
-      transform: scale(1);
-    }
-
+    /* Fixed Top Header Container for Tabs & Close Button */
     .ott-settings-header {
       display: flex;
       align-items: center;
@@ -461,7 +458,7 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       background: rgba(0, 0, 0, 0.3);
       position: relative;
-      padding-right: 48px;
+      padding-right: 48px; /* Close button space */
     }
 
     .ott-settings-nav {
@@ -497,6 +494,7 @@
       border-bottom-color: #2962ff;
     }
 
+    /* Fixed Position Close Button */
     .ott-settings-close {
       position: absolute;
       right: 8px;
@@ -521,7 +519,6 @@
       background: rgba(255, 255, 255, 0.1);
     }
 
-    /* Tab Body Container & Slide Animations */
     .ott-settings-body {
       padding: 16px 20px;
       overflow-y: auto;
@@ -529,26 +526,6 @@
       flex-direction: column;
       gap: 12px;
       max-height: 320px;
-      position: relative;
-      will-change: transform, opacity;
-    }
-
-    .ott-settings-body.slide-left {
-      animation: slideFromRight 0.28s forwards cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .ott-settings-body.slide-right {
-      animation: slideFromLeft 0.28s forwards cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    @keyframes slideFromRight {
-      from { opacity: 0; transform: translateX(35px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-
-    @keyframes slideFromLeft {
-      from { opacity: 0; transform: translateX(-35px); }
-      to { opacity: 1; transform: translateX(0); }
     }
 
     .ott-settings-body::-webkit-scrollbar {
@@ -557,6 +534,16 @@
     .ott-settings-body::-webkit-scrollbar-thumb {
       background: rgba(255, 255, 255, 0.2);
       border-radius: 4px;
+    }
+
+    .ott-section-title {
+      font-size: 11px;
+      color: #2962ff;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      margin-top: 6px;
+      margin-bottom: 2px;
     }
 
     .ott-option-row {
@@ -608,10 +595,12 @@
       visibility: visible;
     }
 
+    /* Hide Shaka Default Quality Button */
     .shaka-quality-button {
       display: none !important;
     }
 
+    /* Orientation Media Query Fixes */
     @media (orientation: portrait) {
       #floating-lock-container {
         left: max(12px, env(safe-area-inset-left));
@@ -697,7 +686,7 @@
       </div>
     </div>
 
-    <!-- YouTube Style Double Tap Seek Indicators -->
+    <!-- YouTube Style Double Tap Seek Indicators with Animated Arrows -->
     <div id="seek-left" class="youtube-seek-hud">
       <div class="yt-arrows">
         <i class="fa-solid fa-chevron-left"></i>
@@ -716,7 +705,7 @@
       <span id="seek-right-text" class="yt-seek-text">+10</span>
     </div>
 
-    <!-- Floating Lock Container -->
+    <!-- Top-Left Floating Lock Container -->
     <div id="floating-lock-container">
       <div id="floating-lock-btn">
         <svg viewBox="0 0 24 24">
@@ -768,10 +757,35 @@
       var currentTab = "quality";
 
       var _stTmr = null;
+
       var isInterfaceLocked = false;
       var lockHideTimer = null;
 
-      // Web Audio API Setup
+      // Language Name Code Map
+      var langMap = {
+        'hi': 'Hindi',
+        'en': 'English',
+        'ta': 'Tamil',
+        'te': 'Telugu',
+        'bn': 'Bengali',
+        'mr': 'Marathi',
+        'kan': 'Kannada',
+        'kn': 'Kannada',
+        'mal': 'Malayalam',
+        'ml': 'Malayalam',
+        'gu': 'Gujarati',
+        'pa': 'Punjabi',
+        'or': 'Odia',
+        'und': 'Default Stream Audio'
+      };
+
+      function getLangName(code) {
+        if (!code) return "Default Audio";
+        var c = code.toLowerCase().split('-')[0];
+        return langMap[c] || code.toUpperCase();
+      }
+
+      // Web Audio API Setup (Volume Boost Engine)
       var audioCtx = null;
       var gainNode = null;
       var sourceNode = null;
@@ -813,11 +827,12 @@
       }
 
       // ----------------------------------------------------
-      // OTT Settings Modal Handler (With Directional Animations)
+      // OTT Settings Modal Handler (Quality, Speed, Subtitles)
       // ----------------------------------------------------
       function setupOttSettings(player) {
         if (!ottModal || !ottBody) return;
 
+        // Close button handler
         if (ottClose) {
           ottClose.onclick = function(e) {
             e.stopPropagation();
@@ -825,34 +840,21 @@
           };
         }
 
+        // Tap outside box to close
         ottModal.onclick = function(e) {
           if (e.target === ottModal) {
             ottModal.classList.remove("show");
           }
         };
 
-        var tabs = Array.from(ottModal.querySelectorAll(".ott-nav-tab"));
-        tabs.forEach(function(tab, index) {
+        // Tab switches
+        var tabs = ottModal.querySelectorAll(".ott-nav-tab");
+        tabs.forEach(function(tab) {
           tab.onclick = function(e) {
             e.stopPropagation();
-            if (tab.classList.contains("active")) return;
-
-            var prevIndex = tabs.findIndex(function(t) { return t.classList.contains("active"); });
-            
             tabs.forEach(function(t) { t.classList.remove("active"); });
             tab.classList.add("active");
             currentTab = tab.getAttribute("data-tab");
-
-            // Apply direction-aware slide transition
-            ottBody.classList.remove("slide-left", "slide-right");
-            void ottBody.offsetWidth; // Trigger reflow for re-animation
-
-            if (index > prevIndex) {
-              ottBody.classList.add("slide-left");  // Slide from Right to Left
-            } else {
-              ottBody.classList.add("slide-right"); // Slide from Left to Right
-            }
-
             renderTabContent(player);
           };
         });
@@ -864,6 +866,7 @@
             var tracks = player.getVariantTracks();
             var isAbr = player.getConfiguration().abr.enabled;
 
+            // Auto Row
             var autoRow = document.createElement("div");
             autoRow.className = "ott-option-row" + (isAbr ? " active" : "");
             autoRow.innerHTML = `
@@ -890,7 +893,7 @@
 
               heights.forEach(function(h) {
                 var isSelected = !isAbr && tracks.some(function(t) { return t.height === h && t.active; });
-                var label = h >= 1080 ? "Full HD (" + h + "p)" : h >= 720 ? "HD (" + h + "p)" : "Standard (" + h + "p)";
+                var label = h >= 1080 ? "Full HD Up to " + h + "p" : h >= 720 ? "HD Up to " + h + "p" : "Data Saver (" + h + "p)";
 
                 var row = document.createElement("div");
                 row.className = "ott-option-row" + (isSelected ? " active" : "");
@@ -945,10 +948,105 @@
               ottBody.appendChild(row);
             });
           }
+          else if (currentTab === "audio") {
+            // Dynamic Audio & Subtitle Detection
+            var audioLangs = player.getAudioLanguages();
+            var textTracks = player.getTextTracks();
+            var currentAudio = player.getConfiguration().preferredAudioLanguage || (audioLangs[0] || "und");
+
+            // Audio Section Header
+            var audioTitle = document.createElement("div");
+            audioTitle.className = "ott-section-title";
+            audioTitle.textContent = "Live Stream Audio Languages";
+            ottBody.appendChild(audioTitle);
+
+            if (audioLangs && audioLangs.length) {
+              audioLangs.forEach(function(lang) {
+                var langName = getLangName(lang);
+                var isSelected = (lang === currentAudio) || (audioLangs.length === 1);
+
+                var row = document.createElement("div");
+                row.className = "ott-option-row" + (isSelected ? " active" : "");
+                row.innerHTML = `
+                  <div class="ott-option-text">
+                    <div class="ott-option-title">${langName}</div>
+                    <div class="ott-option-sub">${isSelected ? "Currently Playing" : "Tap to Switch"}</div>
+                  </div>
+                  <div class="ott-option-check"><i class="fa-solid fa-check"></i></div>
+                `;
+                row.onclick = function(e) {
+                  e.stopPropagation();
+                  player.selectAudioLanguage(lang);
+                  toast("Audio switched to " + langName, "ok", 2000);
+                  renderTabContent(player);
+                };
+                ottBody.appendChild(row);
+              });
+            } else {
+              var defaultRow = document.createElement("div");
+              defaultRow.className = "ott-option-row active";
+              defaultRow.innerHTML = `
+                <div class="ott-option-text">
+                  <div class="ott-option-title">Default Audio Stream</div>
+                  <div class="ott-option-sub">Original Broadcaster Commentary</div>
+                </div>
+                <div class="ott-option-check"><i class="fa-solid fa-check"></i></div>
+              `;
+              ottBody.appendChild(defaultRow);
+            }
+
+            // Subtitles Section
+            var subTitle = document.createElement("div");
+            subTitle.className = "ott-section-title";
+            subTitle.textContent = "Subtitles & Captions";
+            ottBody.appendChild(subTitle);
+
+            if (textTracks && textTracks.length) {
+              var offRow = document.createElement("div");
+              var isTextEnabled = player.isTextTrackVisible();
+              offRow.className = "ott-option-row" + (!isTextEnabled ? " active" : "");
+              offRow.innerHTML = `
+                <div class="ott-option-text">
+                  <div class="ott-option-title">Off</div>
+                </div>
+                <div class="ott-option-check"><i class="fa-solid fa-check"></i></div>
+              `;
+              offRow.onclick = function(e) {
+                e.stopPropagation();
+                player.setTextTrackVisibility(false);
+                renderTabContent(player);
+              };
+              ottBody.appendChild(offRow);
+
+              textTracks.forEach(function(track) {
+                var langName = getLangName(track.language);
+                var isSelected = isTextEnabled && track.active;
+                var row = document.createElement("div");
+                row.className = "ott-option-row" + (isSelected ? " active" : "");
+                row.innerHTML = `
+                  <div class="ott-option-text">
+                    <div class="ott-option-title">${langName} Subtitles</div>
+                  </div>
+                  <div class="ott-option-check"><i class="fa-solid fa-check"></i></div>
+                `;
+                row.onclick = function(e) {
+                  e.stopPropagation();
+                  player.selectTextTrack(track);
+                  player.setTextTrackVisibility(true);
+                  renderTabContent(player);
+                };
+                ottBody.appendChild(row);
+              });
+            } else {
+              var noSubRow = document.createElement("div");
+              noSubRow.style.cssText = "color:#94a3b8; font-size:12px; padding:8px 4px;";
+              noSubRow.textContent = "No subtitles available for this live stream.";
+              ottBody.appendChild(noSubRow);
+            }
+          }
         }
 
         window.openOttSettings = function() {
-          ottBody.classList.remove("slide-left", "slide-right");
           renderTabContent(player);
           ottModal.classList.add("show");
         };
@@ -1130,6 +1228,7 @@
           mode = "";
         });
 
+        // Screen tap handler for lock icon show/hide
         targetFrame.addEventListener("click", function(e) {
           if (isInterfaceLocked) {
             if (floatLockContainer.classList.contains("show")) {
@@ -1175,22 +1274,51 @@
       }
       var TIER = getTier();
       var PROF = {
-        low: { buf: 1.0, reBuf: 0.3, behind: 8, maxH: 360, maxBw: 600000, bwEst: 150000 },
-        mid: { buf: 1.5, reBuf: 0.4, behind: 10, maxH: 720, maxBw: 1800000, bwEst: 400000 },
-        high: { buf: 2.0, reBuf: 0.5, behind: 12, maxH: 1080, maxBw: 0, bwEst: 800000 }
+        low: {
+          buf: 1.0,
+          reBuf: 0.3,
+          behind: 8,
+          maxH: 360,
+          maxBw: 600000,
+          bwEst: 150000
+        },
+        mid: {
+          buf: 1.5,
+          reBuf: 0.4,
+          behind: 10,
+          maxH: 720,
+          maxBw: 1800000,
+          bwEst: 400000
+        },
+        high: {
+          buf: 2.0,
+          reBuf: 0.5,
+          behind: 12,
+          maxH: 1080,
+          maxBw: 0,
+          bwEst: 800000
+        }
       } [TIER];
 
       var FITS = ["contain", "fill", "cover"];
-      var MODE_LABEL = { contain: "Fit", fill: "Fill", cover: "Zoom" };
+      var MODE_LABEL = {
+        contain: "Fit",
+        fill: "Fill",
+        cover: "Zoom"
+      };
       var FICO = {
         contain: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="2" y1="21" x2="22" y2="21"/></svg>',
         fill: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>',
         cover: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M6 7l3 3m0 0H7m2 0V8m9-1l-3 3m0 0h2m-2 0V8M6 13l3-3m0 0H7m2 0v2m9 1l-3-3m0 0h2m-2 0v2"/></svg>'
       };
-      var PIP_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><rect x="12" y="12" width="7" height="5" rx="1" fill="currentColor" stroke="none"/></svg>';
-      var SETTINGS_ICON = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z"/></svg>';
-      var LOCK_ICON = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>';
-      var UNLOCK_ICON = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-9h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6h1.9c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm0 12H6V10h12v10z"/></svg>';
+      var PIP_ICON =
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><rect x="12" y="12" width="7" height="5" rx="1" fill="currentColor" stroke="none"/></svg>';
+      var SETTINGS_ICON =
+        '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z"/></svg>';
+      var LOCK_ICON =
+        '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>';
+      var UNLOCK_ICON =
+        '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-9h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6h1.9c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm0 12H6V10h12v10z"/></svg>';
 
       function toast(msg, type, dur) {
         $status.textContent = msg;
@@ -1198,7 +1326,8 @@
         if (_stTmr) clearTimeout(_stTmr);
         if (dur !== 0) {
           _stTmr = setTimeout(function() {
-            $status.className = $status.className.replace("show", "").trim();
+            $status.className = $status.className.replace("show", "")
+              .trim();
             _stTmr = null;
           }, dur || 4000);
         }
@@ -1221,11 +1350,14 @@
       async function loadData() {
         var r = await fetch(API, {
           cache: "no-store",
-          headers: { Accept: "application/json" }
+          headers: {
+            Accept: "application/json"
+          }
         });
         if (!r.ok) throw new Error("HTTP " + r.status);
         var d = await r.json();
-        if (!d || !Array.isArray(d.channels) || !d.channels.length) throw new Error("empty");
+        if (!d || !Array.isArray(d.channels) || !d.channels.length)
+          throw new Error("empty");
         return d;
       }
 
@@ -1248,9 +1380,18 @@
 
       function shakaErrStr(e) {
         if (!e) return "Unknown error";
-        var c = { 1: "Network", 2: "Text", 3: "Media", 4: "Manifest", 5: "Streaming", 6: "DRM", 7: "Player" };
+        var c = {
+          1: "Network",
+          2: "Text",
+          3: "Media",
+          4: "Manifest",
+          5: "Streaming",
+          6: "DRM",
+          7: "Player"
+        };
         var s = (c[e.category] || "Err") + " " + e.category + ":" + e.code;
-        if (e.data && e.data[0] && typeof e.data[0] === "string") s += " — " + e.data[0].slice(0, 72);
+        if (e.data && e.data[0] && typeof e.data[0] === "string") s += " — " +
+          e.data[0].slice(0, 72);
         return s;
       }
 
@@ -1264,6 +1405,7 @@
         lockBtn.title = "Lock Controls";
         lockBtn.innerHTML = UNLOCK_ICON;
 
+        // Single Tap to Lock UI
         lockBtn.addEventListener("click", function(e) {
           e.stopPropagation();
           if (!isInterfaceLocked) {
@@ -1284,6 +1426,7 @@
         });
         panel.insertBefore(lockBtn, panel.firstChild);
 
+        // OTT Tabbed Settings Button
         var settingsBtn = document.createElement("button");
         settingsBtn.id = "custom-settings-btn";
         settingsBtn.className = "sp-btn sp-settings-btn";
@@ -1299,7 +1442,8 @@
         var fitBtn = document.createElement("button");
         fitBtn.className = "sp-btn sp-fit-btn";
         fitBtn.title = "Video fit: Fit";
-        fitBtn.innerHTML = '<span class="fit-icon">' + FICO.contain + '</span>';
+        fitBtn.innerHTML = '<span class="fit-icon">' + FICO.contain +
+          '</span>';
 
         if (anchor) panel.insertBefore(fitBtn, anchor);
         else panel.appendChild(fitBtn);
@@ -1320,10 +1464,12 @@
         });
         ["fullscreenchange", "webkitfullscreenchange"].forEach(function(ev) {
           document.addEventListener(ev, function() {
-            if (!(document.fullscreenElement || document.webkitFullscreenElement)) applyFit(0);
+            if (!(document.fullscreenElement || document
+                .webkitFullscreenElement)) applyFit(0);
           });
         });
 
+        // Universal Picture in Picture Handler
         var pipBtn = document.createElement("button");
         pipBtn.className = "sp-btn sp-pip-btn";
         pipBtn.title = "Picture in Picture";
@@ -1355,8 +1501,12 @@
           }
         });
 
-        vid.addEventListener("enterpictureinpicture", function() { setPipState(true); });
-        vid.addEventListener("leavepictureinpicture", function() { setPipState(false); });
+        vid.addEventListener("enterpictureinpicture", function() {
+          setPipState(true);
+        });
+        vid.addEventListener("leavepictureinpicture", function() {
+          setPipState(false);
+        });
         if (vid.webkitPresentationMode !== undefined) {
           vid.addEventListener("webkitpresentationmodechanged", function() {
             setPipState(vid.webkitPresentationMode === "picture-in-picture");
@@ -1378,16 +1528,26 @@
         await player.attach($vid);
 
         new shaka.ui.Overlay(player, $pc, $vid).configure({
-          controlPanelElements: ["play_pause", "mute", "volume", "time_and_duration", "spacer", "fullscreen"],
-          seekBarColors: { base: "#fff", buffered: "#a8a8a8", played: "#2962ff" }
+          controlPanelElements: ["play_pause", "mute", "volume",
+            "time_and_duration", "spacer", "fullscreen"
+          ],
+          seekBarColors: {
+            base: "#fff",
+            buffered: "#a8a8a8",
+            played: "#2962ff"
+          }
         });
         setTimeout(function() {
           injectControls($pc, $vid, player);
           setupPlayerGestures($pc, $vid);
         }, 100);
 
-        var cookie = ch.cookie, raw = rawCookie(cookie);
-        var keyId = ch.key_id, key = ch.key, url = ch.stream_url;
+        var cookie = ch.cookie,
+          raw = rawCookie(cookie);
+        var keyId = ch.key_id,
+          key = ch.key,
+          url = ch.stream_url;
+
         var restrictionsRelaxed = false;
 
         function buildCfg() {
@@ -1397,11 +1557,21 @@
             if (PROF.maxBw > 0) restr.maxBandwidth = PROF.maxBw;
           }
           return {
-            drm: { clearKeys: { [keyId]: key } },
+            drm: {
+              clearKeys: {
+                [keyId]: key
+              }
+            },
             manifest: {
               defaultPresentationDelay: 3,
               ignoreTextStreamFailures: true,
-              retryParameters: { maxAttempts: 10, baseDelay: 100, backoffFactor: 1.1, fuzzFactor: .1, timeout: 5000 }
+              retryParameters: {
+                maxAttempts: 10,
+                baseDelay: 100,
+                backoffFactor: 1.1,
+                fuzzFactor: .1,
+                timeout: 5000
+              }
             },
             streaming: {
               lowLatencyMode: false,
@@ -1415,7 +1585,13 @@
               inaccurateManifestTolerance: 0,
               alwaysStreamText: false,
               jumpLargeGaps: true,
-              retryParameters: { maxAttempts: 10, baseDelay: 100, backoffFactor: 1.1, fuzzFactor: .1, timeout: 5000 }
+              retryParameters: {
+                maxAttempts: 10,
+                baseDelay: 100,
+                backoffFactor: 1.1,
+                fuzzFactor: .1,
+                timeout: 5000
+              }
             },
             abr: {
               enabled: true,
@@ -1431,22 +1607,40 @@
         player.configure(buildCfg());
 
         var T = shaka.net.NetworkingEngine.RequestType;
-        player.getNetworkingEngine().registerRequestFilter(function(type, req) {
+        player.getNetworkingEngine().registerRequestFilter(function(type,
+          req) {
           req.headers["Referer"] = "https://www.jiotv.com/";
-          req.headers["User-Agent"] = "Mozilla/5.0 (Linux; Android 11; SM-G991B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36";
+          req.headers["User-Agent"] =
+            "Mozilla/5.0 (Linux; Android 11; SM-G991B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36";
           req.headers["Cookie"] = cookie;
-          if (type === T.MANIFEST || type === T.SEGMENT) req.uris = req.uris.map(function(u) { return withCookie(u, raw); });
+          if (type === T.MANIFEST || type === T.SEGMENT)
+            req.uris = req.uris.map(function(u) {
+              return withCookie(u, raw);
+            });
         });
 
-        var refreshing = false, retries = 0, edgeTried = false, lastTry = 0, started = false;
+        var refreshing = false,
+          retries = 0,
+          edgeTried = false,
+          lastTry = 0,
+          started = false;
 
         function unmuteOnce() {
           $vid.muted = false;
           initializeAudioEngine($vid);
         }
-        $pc.addEventListener("pointerdown", unmuteOnce, { capture: true, once: true });
-        $pc.addEventListener("click", unmuteOnce, { capture: true, once: true });
-        $pc.addEventListener("keydown", unmuteOnce, { capture: true, once: true });
+        $pc.addEventListener("pointerdown", unmuteOnce, {
+          capture: true,
+          once: true
+        });
+        $pc.addEventListener("click", unmuteOnce, {
+          capture: true,
+          once: true
+        });
+        $pc.addEventListener("keydown", unmuteOnce, {
+          capture: true,
+          once: true
+        });
 
         function goLiveEdge() {
           if (refreshing) return;
@@ -1471,7 +1665,9 @@
           
           try {
             var d = await loadData();
-            var fresh = d.channels.find(function(c) { return c.id === ch.id; });
+            var fresh = d.channels.find(function(c) {
+              return c.id === ch.id;
+            });
             if (!fresh) throw new Error("missing");
             cookie = fresh.cookie;
             raw = rawCookie(cookie);
@@ -1483,25 +1679,37 @@
             $vid.play().catch(function() {});
             retries = 0;
             edgeTried = false;
+
           } catch (_) {
-            setTimeout(reload, Math.min(300 * Math.pow(1.2, retries - 1), 2000));
+            setTimeout(reload, Math.min(300 * Math.pow(1.2, retries - 1),
+              2000));
           } finally {
             refreshing = false;
           }
         }
 
-        var RECOVERABLE = [1001, 1002, 1003, 4012, 6006, 6007, 7000, 7001, 7002];
+        var RECOVERABLE = [1001, 1002, 1003, 4012, 6006, 6007, 7000, 7001,
+          7002
+        ];
 
         player.addEventListener("error", function(ev) {
-          var err = ev.detail, code = err && err.code;
+          var err = ev.detail,
+            code = err && err.code;
           if (code === 4014 && !restrictionsRelaxed) {
             restrictionsRelaxed = true;
             refreshing = true;
             player.configure(buildCfg());
             player.load(url)
-              .then(function() { $vid.play().catch(function() {}); })
-              .catch(function() { reload(); })
-              .finally(function() { refreshing = false; });
+              .then(function() {
+                $vid.play().catch(function() {});
+
+              })
+              .catch(function() {
+                reload();
+              })
+              .finally(function() {
+                refreshing = false;
+              });
             return;
           }
 
@@ -1510,7 +1718,9 @@
         });
 
         try {
+
           await player.load(url);
+
         } catch (_) {
           setTimeout(reload, 500);
           return;
@@ -1520,9 +1730,17 @@
 
         function onStall() {
           if (refreshing) return;
-          try { player.configure("abr.restrictions.maxHeight", 240); } catch (_) {}
-          if ($vid.paused) $vid.play().catch(function() {});
+          
+          try {
+            player.configure("abr.restrictions.maxHeight", 240);
+          } catch (_) {}
+
+          if ($vid.paused) {
+            $vid.play().catch(function() {});
+          }
+
           if (stallTmr) return;
+
           stallTmr = setTimeout(function() {
             stallTmr = null;
             if ($vid.readyState < 3) {
@@ -1543,29 +1761,37 @@
         $vid.addEventListener("waiting", onStall);
         $vid.addEventListener("stalled", onStall);
         $vid.addEventListener("playing", onPlaying);
-        $vid.addEventListener("error", function() { if (!refreshing) reload(); });
+        $vid.addEventListener("error", function() {
+          if (!refreshing) reload();
+        });
 
         document.addEventListener("visibilitychange", function() {
           if (!document.hidden) {
             setTimeout(function() {
-              if (started && $vid.paused && !refreshing) $vid.play().catch(function() {});
+              if (started && $vid.paused && !refreshing) $vid.play()
+                .catch(function() {});
             }, 200);
           }
         });
 
-        var netConn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+        var netConn = navigator.connection || navigator.mozConnection ||
+          navigator.webkitConnection;
         if (netConn) {
           netConn.addEventListener("change", function() {
             if (!player) return;
             var t = netConn.effectiveType || "4g";
-            var h = (t === "slow-2g" || t === "2g") ? 240 : (t === "3g") ? 360 : PROF.maxH;
-            try { player.configure("abr.restrictions.maxHeight", h); } catch (_) {}
+            var h = (t === "slow-2g" || t === "2g") ? 240 : (t === "3g") ?
+              360 : PROF.maxH;
+            try {
+              player.configure("abr.restrictions.maxHeight", h);
+            } catch (_) {}
           });
         }
       }
 
       async function main() {
-        var id = getChId(), data;
+        var id = getChId(),
+          data;
         try {
           data = await loadData();
         } catch (_) {
@@ -1576,7 +1802,9 @@
           renderList(data.channels);
           return;
         }
-        var ch = data.channels.find(function(c) { return c.id === id; });
+        var ch = data.channels.find(function(c) {
+          return c.id === id;
+        });
         if (!ch) {
           errMsg("Channel not found.");
           return;
@@ -1589,5 +1817,4 @@
     })();
   </script>
 </body>
-
 </html>
