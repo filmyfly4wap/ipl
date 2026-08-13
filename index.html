@@ -417,6 +417,93 @@
       filter: drop-shadow(0 0 4px rgba(41, 98, 255, 0.8));
     }
 
+    /* Custom Clean Quality Menu Styles */
+    .custom-quality-menu {
+      position: absolute;
+      right: 15px;
+      bottom: 50px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 8px 0;
+      z-index: 10005;
+      display: none;
+      flex-direction: column;
+      min-width: 140px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .custom-quality-menu.show {
+      display: flex;
+    }
+
+    .custom-quality-menu-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4px 12px 8px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .custom-quality-menu-title {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.5);
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .custom-quality-close-btn {
+      color: #94a3b8;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      line-height: 1;
+      padding: 2px 4px;
+      transition: color 0.2s;
+    }
+
+    .custom-quality-close-btn:hover {
+      color: #ffffff;
+    }
+
+    .custom-quality-item {
+      padding: 8px 16px;
+      color: #e2e8f0;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+
+    .custom-quality-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .custom-quality-item.active {
+      color: #2962ff;
+      font-weight: 700;
+    }
+
+    .custom-quality-item .check-icon {
+      width: 12px;
+      visibility: hidden;
+    }
+
+    .custom-quality-item.active .check-icon {
+      visibility: visible;
+    }
+
+    /* Hide Shaka Default Quality Menu Button */
+    .shaka-quality-button {
+      display: none !important;
+    }
+
     /* Orientation Media Query Fixes */
     @media (orientation: portrait) {
       #floating-lock-container {
@@ -532,6 +619,15 @@
       <div class="lock-side-label">Tap to Unlock</div>
     </div>
 
+    <!-- Custom Quality Menu Popup -->
+    <div id="custom-q-menu" class="custom-quality-menu">
+      <div class="custom-quality-menu-header">
+        <span class="custom-quality-menu-title">Quality</span>
+        <span id="custom-q-close" class="custom-quality-close-btn">×</span>
+      </div>
+      <div id="custom-q-list"></div>
+    </div>
+
     <video id="v" playsinline webkit-playsinline preload="none"
       x5-video-player-type="h5" x5-video-player-fullscreen="true"></video>
     <div class="custom-watermark"><img src="https://i.postimg.cc/SNjy16J7/cricketlive.png"></div>
@@ -553,10 +649,33 @@
       var $vid = document.getElementById("v");
       var floatLockContainer = document.getElementById("floating-lock-container");
       var floatLock = document.getElementById("floating-lock-btn");
+      var qMenuEl = document.getElementById("custom-q-menu");
+      var qListEl = document.getElementById("custom-q-list");
+      var qCloseBtn = document.getElementById("custom-q-close");
       var _stTmr = null;
 
       var isInterfaceLocked = false;
       var lockHideTimer = null;
+
+      // Global Dismiss Handler: Screen par kahin bhi tap/click hone par Quality Menu close ho jayega
+      function autoHideQualityMenu(e) {
+        if (qMenuEl && qMenuEl.classList.contains("show")) {
+          if (!e.target.closest("#custom-q-btn, #custom-q-menu")) {
+            qMenuEl.classList.remove("show");
+          }
+        }
+      }
+
+      document.addEventListener("click", autoHideQualityMenu, true);
+      document.addEventListener("touchend", autoHideQualityMenu, true);
+
+      // Close Quality Menu on '×' Button Click
+      if (qCloseBtn) {
+        qCloseBtn.addEventListener("click", function(e) {
+          e.stopPropagation();
+          if (qMenuEl) qMenuEl.classList.remove("show");
+        });
+      }
 
       // Web Audio API Setup (Volume Boost Engine)
       var audioCtx = null;
@@ -684,7 +803,7 @@
           if (e.touches.length !== 1) return;
 
           var isControlsActive = targetFrame.querySelector(".shaka-controls-container")?.getAttribute("shown") === "true";
-          if (isControlsActive && e.target.closest(".shaka-controls-button-panel, .shaka-range-container")) return;
+          if (isControlsActive && e.target.closest(".shaka-controls-button-panel, .shaka-range-container, .custom-quality-menu")) return;
 
           var touch = e.touches[0];
           startX = touch.clientX;
@@ -778,7 +897,7 @@
         });
 
         // Tap screen when locked to show top-left lock container
-        targetFrame.addEventListener("click", function() {
+        targetFrame.addEventListener("click", function(e) {
           if (isInterfaceLocked) {
             if (floatLockContainer.classList.contains("show")) {
               floatLockContainer.classList.remove("show");
@@ -863,6 +982,8 @@
       };
       var PIP_ICON =
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><rect x="12" y="12" width="7" height="5" rx="1" fill="currentColor" stroke="none"/></svg>';
+      var QUALITY_ICON =
+        '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z"/></svg>';
       var LOCK_ICON =
         '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>';
       var UNLOCK_ICON =
@@ -943,6 +1064,69 @@
         return s;
       }
 
+      // Build Clean Quality Menu (Auto, 1080p, 720p, 480p, 360p)
+      function setupCustomQualityMenu(player) {
+        if (!qListEl) return;
+
+        function updateMenuUI() {
+          var tracks = player.getVariantTracks();
+          if (!tracks || !tracks.length) return;
+
+          // Group by unique heights
+          var heights = [];
+          tracks.forEach(function(t) {
+            if (t.height && heights.indexOf(t.height) === -1) {
+              heights.push(t.height);
+            }
+          });
+          heights.sort(function(a, b) { return b - a; });
+
+          qListEl.innerHTML = "";
+
+          var isAbrEnabled = player.getConfiguration().abr.enabled;
+
+          // Auto Option
+          var autoItem = document.createElement("div");
+          autoItem.className = "custom-quality-item" + (isAbrEnabled ? " active" : "");
+          autoItem.innerHTML = '<span class="check-icon">✓</span> Auto';
+          autoItem.onclick = function(e) {
+            e.stopPropagation();
+            player.configure({ abr: { enabled: true } });
+            qMenuEl.classList.remove("show");
+            toast("Quality set to Auto", "ok", 2000);
+            updateMenuUI();
+          };
+          qListEl.appendChild(autoItem);
+
+          // Resolution Options
+          heights.forEach(function(h) {
+            var item = document.createElement("div");
+            var isSelected = !isAbrEnabled && tracks.some(function(t) {
+              return t.height === h && t.active;
+            });
+
+            item.className = "custom-quality-item" + (isSelected ? " active" : "");
+            item.innerHTML = '<span class="check-icon">✓</span> ' + h + 'p';
+            item.onclick = function(e) {
+              e.stopPropagation();
+              var targetTrack = tracks.find(function(t) { return t.height === h; });
+              if (targetTrack) {
+                player.configure({ abr: { enabled: false } });
+                player.selectVariantTrack(targetTrack, true);
+                toast("Quality set to " + h + "p", "ok", 2000);
+              }
+              qMenuEl.classList.remove("show");
+              updateMenuUI();
+            };
+            qListEl.appendChild(item);
+          });
+        }
+
+        player.addEventListener("trackschanged", updateMenuUI);
+        player.addEventListener("adaptation", updateMenuUI);
+        setTimeout(updateMenuUI, 1000);
+      }
+
       function injectControls(container, vid, player) {
         var panel = container.querySelector(".shaka-controls-button-panel");
         if (!panel) return;
@@ -973,6 +1157,18 @@
           }
         });
         panel.insertBefore(lockBtn, panel.firstChild);
+
+        // Custom Clean Quality Button
+        var qBtn = document.createElement("button");
+        qBtn.id = "custom-q-btn";
+        qBtn.className = "sp-btn sp-q-btn";
+        qBtn.title = "Quality";
+        qBtn.innerHTML = QUALITY_ICON;
+        qBtn.addEventListener("click", function(e) {
+          e.stopPropagation();
+          if (qMenuEl) qMenuEl.classList.toggle("show");
+        });
+        panel.insertBefore(qBtn, anchor || panel.lastChild);
 
         var fitIdx = 0;
         var fitBtn = document.createElement("button");
@@ -1005,7 +1201,7 @@
           });
         });
 
-        // FIXED: Universal Picture in Picture Handler (Supports Chrome, Mobile Browsers, Safari & Fallback)
+        // Universal Picture in Picture Handler
         var pipBtn = document.createElement("button");
         pipBtn.className = "sp-btn sp-pip-btn";
         pipBtn.title = "Picture in Picture";
@@ -1020,16 +1216,13 @@
         pipBtn.addEventListener("click", async function(e) {
           e.stopPropagation();
           try {
-            // Check native HTML5 PiP support on video element
             if (document.pictureInPictureEnabled && !vid.disablePictureInPicture) {
               if (document.pictureInPictureElement) {
                 await document.exitPictureInPicture();
               } else {
                 await vid.requestPictureInPicture();
               }
-            } 
-            // Safari / WebKit Presentation Mode Fallback
-            else if (vid.webkitSupportsPresentationMode && typeof vid.webkitSetPresentationMode === "function") {
+            } else if (vid.webkitSupportsPresentationMode && typeof vid.webkitSetPresentationMode === "function") {
               var targetMode = vid.webkitPresentationMode === "picture-in-picture" ? "inline" : "picture-in-picture";
               vid.webkitSetPresentationMode(targetMode);
             } else {
@@ -1051,6 +1244,8 @@
             setPipState(vid.webkitPresentationMode === "picture-in-picture");
           });
         }
+
+        setupCustomQualityMenu(player);
       }
 
       async function startPlayer(ch) {
@@ -1066,7 +1261,7 @@
 
         new shaka.ui.Overlay(player, $pc, $vid).configure({
           controlPanelElements: ["play_pause", "mute", "volume",
-            "time_and_duration", "spacer", "quality", "fullscreen"
+            "time_and_duration", "spacer", "fullscreen"
           ],
           seekBarColors: {
             base: "#fff",
