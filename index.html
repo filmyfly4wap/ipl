@@ -13,7 +13,7 @@
   <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/shaka-player@4.16.2/dist/controls.css">
   
-  <!-- Font Awesome Icons for YouTube Style Arrows -->
+  <!-- Font Awesome Icons for YouTube Style Arrows & Settings -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
@@ -417,89 +417,157 @@
       filter: drop-shadow(0 0 4px rgba(41, 98, 255, 0.8));
     }
 
-    /* Custom Clean Quality Menu Styles */
-    .custom-quality-menu {
+    /* OTT / JioCinema Style Tabbed Settings Modal */
+    .ott-settings-modal {
       position: absolute;
-      right: 15px;
-      bottom: 50px;
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 12px;
-      padding: 8px 0;
-      z-index: 10005;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 10008;
       display: none;
-      flex-direction: column;
-      min-width: 140px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.25s ease;
     }
 
-    .custom-quality-menu.show {
+    .ott-settings-modal.show {
       display: flex;
+      opacity: 1;
     }
 
-    .custom-quality-menu-header {
+    .ott-settings-box {
+      width: min(90%, 540px);
+      max-height: 85vh;
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+      position: relative;
+    }
+
+    .ott-settings-nav {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 4px 12px 8px 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.2);
+      padding: 0 10px;
+      overflow-x: auto;
+      scrollbar-width: none;
     }
 
-    .custom-quality-menu-title {
-      font-size: 11px;
-      color: rgba(255, 255, 255, 0.5);
-      text-transform: uppercase;
-      font-weight: 700;
-      letter-spacing: 0.5px;
+    .ott-settings-nav::-webkit-scrollbar {
+      display: none;
     }
 
-    .custom-quality-close-btn {
+    .ott-nav-tab {
+      padding: 16px 18px;
       color: #94a3b8;
-      font-size: 16px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .ott-nav-tab:hover {
+      color: #f8fafc;
+    }
+
+    .ott-nav-tab.active {
+      color: #ffffff;
+      border-bottom-color: #2962ff;
+    }
+
+    .ott-settings-close {
+      margin-left: auto;
+      color: #94a3b8;
+      font-size: 22px;
       font-weight: 700;
       cursor: pointer;
-      line-height: 1;
-      padding: 2px 4px;
+      padding: 10px 14px;
       transition: color 0.2s;
+      line-height: 1;
     }
 
-    .custom-quality-close-btn:hover {
+    .ott-settings-close:hover {
       color: #ffffff;
     }
 
-    .custom-quality-item {
-      padding: 8px 16px;
-      color: #e2e8f0;
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
+    .ott-settings-body {
+      padding: 16px 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 320px;
+    }
+
+    .ott-section-title {
+      font-size: 11px;
+      color: #2962ff;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      margin-top: 6px;
+      margin-bottom: 2px;
+    }
+
+    .ott-option-row {
       display: flex;
       align-items: center;
-      gap: 8px;
-      transition: background 0.2s;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
     }
 
-    .custom-quality-item:hover {
-      background: rgba(255, 255, 255, 0.1);
+    .ott-option-row:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(41, 98, 255, 0.3);
     }
 
-    .custom-quality-item.active {
+    .ott-option-row.active {
+      background: rgba(41, 98, 255, 0.15);
+      border-color: #2962ff;
+    }
+
+    .ott-option-text {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .ott-option-title {
+      color: #f8fafc;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .ott-option-sub {
+      color: #94a3b8;
+      font-size: 11px;
+    }
+
+    .ott-option-check {
       color: #2962ff;
-      font-weight: 700;
-    }
-
-    .custom-quality-item .check-icon {
-      width: 12px;
+      font-size: 16px;
       visibility: hidden;
     }
 
-    .custom-quality-item.active .check-icon {
+    .ott-option-row.active .ott-option-check {
       visibility: visible;
     }
 
-    /* Hide Shaka Default Quality Menu Button */
+    /* Hide Shaka Default Quality Button */
     .shaka-quality-button {
       display: none !important;
     }
@@ -619,13 +687,16 @@
       <div class="lock-side-label">Tap to Unlock</div>
     </div>
 
-    <!-- Custom Quality Menu Popup -->
-    <div id="custom-q-menu" class="custom-quality-menu">
-      <div class="custom-quality-menu-header">
-        <span class="custom-quality-menu-title">Quality</span>
-        <span id="custom-q-close" class="custom-quality-close-btn">×</span>
+    <!-- OTT Tabbed Settings Modal -->
+    <div id="ott-settings-modal" class="ott-settings-modal">
+      <div class="ott-settings-box">
+        <div class="ott-settings-nav">
+          <div class="ott-nav-tab active" data-tab="quality">Quality</div>
+          <div class="ott-nav-tab" data-tab="speed">Playback Speed</div>
+          <span id="ott-modal-close" class="ott-settings-close">×</span>
+        </div>
+        <div id="ott-settings-body" class="ott-settings-body"></div>
       </div>
-      <div id="custom-q-list"></div>
     </div>
 
     <video id="v" playsinline webkit-playsinline preload="none"
@@ -649,32 +720,39 @@
       var $vid = document.getElementById("v");
       var floatLockContainer = document.getElementById("floating-lock-container");
       var floatLock = document.getElementById("floating-lock-btn");
-      var qMenuEl = document.getElementById("custom-q-menu");
-      var qListEl = document.getElementById("custom-q-list");
-      var qCloseBtn = document.getElementById("custom-q-close");
+
+      var ottModal = document.getElementById("ott-settings-modal");
+      var ottBody = document.getElementById("ott-settings-body");
+      var ottClose = document.getElementById("ott-modal-close");
+      var currentTab = "quality";
+
       var _stTmr = null;
 
       var isInterfaceLocked = false;
       var lockHideTimer = null;
 
-      // Global Dismiss Handler: Screen par kahin bhi tap/click hone par Quality Menu close ho jayega
-      function autoHideQualityMenu(e) {
-        if (qMenuEl && qMenuEl.classList.contains("show")) {
-          if (!e.target.closest("#custom-q-btn, #custom-q-menu")) {
-            qMenuEl.classList.remove("show");
-          }
-        }
-      }
+      // Language Name Code Map
+      var langMap = {
+        'hi': 'Hindi',
+        'en': 'English',
+        'ta': 'Tamil',
+        'te': 'Telugu',
+        'bn': 'Bengali',
+        'mr': 'Marathi',
+        'kan': 'Kannada',
+        'kn': 'Kannada',
+        'mal': 'Malayalam',
+        'ml': 'Malayalam',
+        'gu': 'Gujarati',
+        'pa': 'Punjabi',
+        'or': 'Odia',
+        'und': 'Default Stream Audio'
+      };
 
-      document.addEventListener("click", autoHideQualityMenu, true);
-      document.addEventListener("touchend", autoHideQualityMenu, true);
-
-      // Close Quality Menu on '×' Button Click
-      if (qCloseBtn) {
-        qCloseBtn.addEventListener("click", function(e) {
-          e.stopPropagation();
-          if (qMenuEl) qMenuEl.classList.remove("show");
-        });
+      function getLangName(code) {
+        if (!code) return "Default Audio";
+        var c = code.toLowerCase().split('-')[0];
+        return langMap[c] || code.toUpperCase();
       }
 
       // Web Audio API Setup (Volume Boost Engine)
@@ -718,6 +796,232 @@
         }, 3000);
       }
 
+      // ----------------------------------------------------
+      // OTT Settings Modal Handler (Quality, Speed, Subtitles)
+      // ----------------------------------------------------
+      function setupOttSettings(player) {
+        if (!ottModal || !ottBody) return;
+
+        // Close button handler
+        if (ottClose) {
+          ottClose.onclick = function(e) {
+            e.stopPropagation();
+            ottModal.classList.remove("show");
+          };
+        }
+
+        // Tap outside box to close
+        ottModal.onclick = function(e) {
+          if (e.target === ottModal) {
+            ottModal.classList.remove("show");
+          }
+        };
+
+        // Tab switches
+        var tabs = ottModal.querySelectorAll(".ott-nav-tab");
+        tabs.forEach(function(tab) {
+          tab.onclick = function(e) {
+            e.stopPropagation();
+            tabs.forEach(function(t) { t.classList.remove("active"); });
+            tab.classList.add("active");
+            currentTab = tab.getAttribute("data-tab");
+            renderTabContent(player);
+          };
+        });
+
+        function renderTabContent(player) {
+          ottBody.innerHTML = "";
+
+          if (currentTab === "quality") {
+            var tracks = player.getVariantTracks();
+            var isAbr = player.getConfiguration().abr.enabled;
+
+            // Auto Row
+            var autoRow = document.createElement("div");
+            autoRow.className = "ott-option-row" + (isAbr ? " active" : "");
+            autoRow.innerHTML = `
+              <div class="ott-option-text">
+                <div class="ott-option-title">Auto</div>
+                <div class="ott-option-sub">Recommended for best experience</div>
+              </div>
+              <div class="ott-option-check"><i class="fa-solid fa-check"></i></div>
+            `;
+            autoRow.onclick = function(e) {
+              e.stopPropagation();
+              player.configure({ abr: { enabled: true } });
+              toast("Quality set to Auto", "ok", 2000);
+              renderTabContent(player);
+            };
+            ottBody.appendChild(autoRow);
+
+            if (tracks && tracks.length) {
+              var heights = [];
+              tracks.forEach(function(t) {
+                if (t.height && heights.indexOf(t.height) === -1) heights.push(t.height);
+              });
+              heights.sort(function(a, b) { return b - a; });
+
+              heights.forEach(function(h) {
+                var isSelected = !isAbr && tracks.some(function(t) { return t.height === h && t.active; });
+                var label = h >= 1080 ? "Full HD Up to " + h + "p" : h >= 720 ? "HD Up to " + h + "p" : "Data Saver (" + h + "p)";
+
+                var row = document.createElement("div");
+                row.className = "ott-option-row" + (isSelected ? " active" : "");
+                row.innerHTML = `
+                  <div class="ott-option-text">
+                    <div class="ott-option-title">${h}p</div>
+                    <div class="ott-option-sub">${label}</div>
+                  </div>
+                  <div class="ott-option-check"><i class="fa-solid fa-check"></i></div>
+                `;
+                row.onclick = function(e) {
+                  e.stopPropagation();
+                  var target = tracks.find(function(t) { return t.height === h; });
+                  if (target) {
+                    player.configure({ abr: { enabled: false } });
+                    player.selectVariantTrack(target, true);
+                    toast("Quality set to " + h + "p", "ok", 2000);
+                  }
+                  renderTabContent(player);
+                };
+                ottBody.appendChild(row);
+              });
+            }
+          } 
+          else if (currentTab === "speed") {
+            var speeds = [
+              { val: 0.5, label: "0.5x" },
+              { val: 0.75, label: "0.75x" },
+              { val: 1.0, label: "1x Normal" },
+              { val: 1.25, label: "1.25x" },
+              { val: 1.5, label: "1.5x" },
+              { val: 2.0, label: "2x" }
+            ];
+            var curSpeed = $vid.playbackRate || 1.0;
+
+            speeds.forEach(function(s) {
+              var isSelected = Math.abs(curSpeed - s.val) < 0.05;
+              var row = document.createElement("div");
+              row.className = "ott-option-row" + (isSelected ? " active" : "");
+              row.innerHTML = `
+                <div class="ott-option-text">
+                  <div class="ott-option-title">${s.label}</div>
+                </div>
+                <div class="ott-option-check"><i class="fa-solid fa-check"></i></div>
+              `;
+              row.onclick = function(e) {
+                e.stopPropagation();
+                $vid.playbackRate = s.val;
+                toast("Playback speed set to " + s.label, "ok", 2000);
+                renderTabContent(player);
+              };
+              ottBody.appendChild(row);
+            });
+          }
+          else if (currentTab === "audio") {
+            // Dynamic Audio & Subtitle Detection
+            var audioLangs = player.getAudioLanguages();
+            var textTracks = player.getTextTracks();
+            var currentAudio = player.getConfiguration().preferredAudioLanguage || (audioLangs[0] || "und");
+
+            // Audio Section Header
+            var audioTitle = document.createElement("div");
+            audioTitle.className = "ott-section-title";
+            audioTitle.textContent = "Live Stream Audio Languages";
+            ottBody.appendChild(audioTitle);
+
+            if (audioLangs && audioLangs.length) {
+              audioLangs.forEach(function(lang) {
+                var langName = getLangName(lang);
+                var isSelected = (lang === currentAudio) || (audioLangs.length === 1);
+
+                var row = document.createElement("div");
+                row.className = "ott-option-row" + (isSelected ? " active" : "");
+                row.innerHTML = `
+                  <div class="ott-option-text">
+                    <div class="ott-option-title">${langName}</div>
+                    <div class="ott-option-sub">${isSelected ? "Currently Playing" : "Tap to Switch"}</div>
+                  </div>
+                  <div class="ott-option-check"><i class="fa-solid fa-check"></i></div>
+                `;
+                row.onclick = function(e) {
+                  e.stopPropagation();
+                  player.selectAudioLanguage(lang);
+                  toast("Audio switched to " + langName, "ok", 2000);
+                  renderTabContent(player);
+                };
+                ottBody.appendChild(row);
+              });
+            } else {
+              var defaultRow = document.createElement("div");
+              defaultRow.className = "ott-option-row active";
+              defaultRow.innerHTML = `
+                <div class="ott-option-text">
+                  <div class="ott-option-title">Default Audio Stream</div>
+                  <div class="ott-option-sub">Original Broadcaster Commentary</div>
+                </div>
+                <div class="ott-option-check"><i class="fa-solid fa-check"></i></div>
+              `;
+              ottBody.appendChild(defaultRow);
+            }
+
+            // Subtitles Section
+            var subTitle = document.createElement("div");
+            subTitle.className = "ott-section-title";
+            subTitle.textContent = "Subtitles & Captions";
+            ottBody.appendChild(subTitle);
+
+            if (textTracks && textTracks.length) {
+              var offRow = document.createElement("div");
+              var isTextEnabled = player.isTextTrackVisible();
+              offRow.className = "ott-option-row" + (!isTextEnabled ? " active" : "");
+              offRow.innerHTML = `
+                <div class="ott-option-text">
+                  <div class="ott-option-title">Off</div>
+                </div>
+                <div class="ott-option-check"><i class="fa-solid fa-check"></i></div>
+              `;
+              offRow.onclick = function(e) {
+                e.stopPropagation();
+                player.setTextTrackVisibility(false);
+                renderTabContent(player);
+              };
+              ottBody.appendChild(offRow);
+
+              textTracks.forEach(function(track) {
+                var langName = getLangName(track.language);
+                var isSelected = isTextEnabled && track.active;
+                var row = document.createElement("div");
+                row.className = "ott-option-row" + (isSelected ? " active" : "");
+                row.innerHTML = `
+                  <div class="ott-option-text">
+                    <div class="ott-option-title">${langName} Subtitles</div>
+                  </div>
+                  <div class="ott-option-check"><i class="fa-solid fa-check"></i></div>
+                `;
+                row.onclick = function(e) {
+                  e.stopPropagation();
+                  player.selectTextTrack(track);
+                  player.setTextTrackVisibility(true);
+                  renderTabContent(player);
+                };
+                ottBody.appendChild(row);
+              });
+            } else {
+              var noSubRow = document.createElement("div");
+              noSubRow.style.cssText = "color:#94a3b8; font-size:12px; padding:8px 4px;";
+              noSubRow.textContent = "No subtitles available for this live stream.";
+              ottBody.appendChild(noSubRow);
+            }
+          }
+        }
+
+        window.openOttSettings = function() {
+          renderTabContent(player);
+          ottModal.classList.add("show");
+        };
+      }
+
       function setupPlayerGestures(targetFrame, video) {
         var startX = 0, startY = 0;
         var startBright = 100;
@@ -727,7 +1031,6 @@
         var mode = "";
         var hudTimer = null;
 
-        // Cumulative Seeking Variables
         var lastTapTime = 0;
         var accumulatedSeek = 0;
         var seekResetTimer = null;
@@ -748,7 +1051,6 @@
         function updateBrightnessHUD(val) {
           var p = Math.round(val);
           if (hudBrightFill) hudBrightFill.style.height = p + "%";
-          
           if (hudVol) hudVol.style.display = "none";
           if (hudBright) {
             hudBright.style.display = "flex";
@@ -803,7 +1105,7 @@
           if (e.touches.length !== 1) return;
 
           var isControlsActive = targetFrame.querySelector(".shaka-controls-container")?.getAttribute("shown") === "true";
-          if (isControlsActive && e.target.closest(".shaka-controls-button-panel, .shaka-range-container, .custom-quality-menu")) return;
+          if (isControlsActive && e.target.closest(".shaka-controls-button-panel, .shaka-range-container, .ott-settings-modal")) return;
 
           var touch = e.touches[0];
           startX = touch.clientX;
@@ -896,7 +1198,7 @@
           mode = "";
         });
 
-        // Tap screen when locked to show top-left lock container
+        // Screen tap handler for lock icon show/hide
         targetFrame.addEventListener("click", function(e) {
           if (isInterfaceLocked) {
             if (floatLockContainer.classList.contains("show")) {
@@ -908,7 +1210,6 @@
           }
         });
 
-        // Unlock action on clicking the animated floating lock button
         if (floatLock) {
           floatLock.onclick = function(e) {
             e.stopPropagation();
@@ -982,7 +1283,7 @@
       };
       var PIP_ICON =
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><rect x="12" y="12" width="7" height="5" rx="1" fill="currentColor" stroke="none"/></svg>';
-      var QUALITY_ICON =
+      var SETTINGS_ICON =
         '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z"/></svg>';
       var LOCK_ICON =
         '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>';
@@ -1064,69 +1365,6 @@
         return s;
       }
 
-      // Build Clean Quality Menu (Auto, 1080p, 720p, 480p, 360p)
-      function setupCustomQualityMenu(player) {
-        if (!qListEl) return;
-
-        function updateMenuUI() {
-          var tracks = player.getVariantTracks();
-          if (!tracks || !tracks.length) return;
-
-          // Group by unique heights
-          var heights = [];
-          tracks.forEach(function(t) {
-            if (t.height && heights.indexOf(t.height) === -1) {
-              heights.push(t.height);
-            }
-          });
-          heights.sort(function(a, b) { return b - a; });
-
-          qListEl.innerHTML = "";
-
-          var isAbrEnabled = player.getConfiguration().abr.enabled;
-
-          // Auto Option
-          var autoItem = document.createElement("div");
-          autoItem.className = "custom-quality-item" + (isAbrEnabled ? " active" : "");
-          autoItem.innerHTML = '<span class="check-icon">✓</span> Auto';
-          autoItem.onclick = function(e) {
-            e.stopPropagation();
-            player.configure({ abr: { enabled: true } });
-            qMenuEl.classList.remove("show");
-            toast("Quality set to Auto", "ok", 2000);
-            updateMenuUI();
-          };
-          qListEl.appendChild(autoItem);
-
-          // Resolution Options
-          heights.forEach(function(h) {
-            var item = document.createElement("div");
-            var isSelected = !isAbrEnabled && tracks.some(function(t) {
-              return t.height === h && t.active;
-            });
-
-            item.className = "custom-quality-item" + (isSelected ? " active" : "");
-            item.innerHTML = '<span class="check-icon">✓</span> ' + h + 'p';
-            item.onclick = function(e) {
-              e.stopPropagation();
-              var targetTrack = tracks.find(function(t) { return t.height === h; });
-              if (targetTrack) {
-                player.configure({ abr: { enabled: false } });
-                player.selectVariantTrack(targetTrack, true);
-                toast("Quality set to " + h + "p", "ok", 2000);
-              }
-              qMenuEl.classList.remove("show");
-              updateMenuUI();
-            };
-            qListEl.appendChild(item);
-          });
-        }
-
-        player.addEventListener("trackschanged", updateMenuUI);
-        player.addEventListener("adaptation", updateMenuUI);
-        setTimeout(updateMenuUI, 1000);
-      }
-
       function injectControls(container, vid, player) {
         var panel = container.querySelector(".shaka-controls-button-panel");
         if (!panel) return;
@@ -1137,7 +1375,7 @@
         lockBtn.title = "Lock Controls";
         lockBtn.innerHTML = UNLOCK_ICON;
 
-        // Single Tap to Lock UI and hide controls
+        // Single Tap to Lock UI
         lockBtn.addEventListener("click", function(e) {
           e.stopPropagation();
           if (!isInterfaceLocked) {
@@ -1158,17 +1396,17 @@
         });
         panel.insertBefore(lockBtn, panel.firstChild);
 
-        // Custom Clean Quality Button
-        var qBtn = document.createElement("button");
-        qBtn.id = "custom-q-btn";
-        qBtn.className = "sp-btn sp-q-btn";
-        qBtn.title = "Quality";
-        qBtn.innerHTML = QUALITY_ICON;
-        qBtn.addEventListener("click", function(e) {
+        // OTT Tabbed Settings Button
+        var settingsBtn = document.createElement("button");
+        settingsBtn.id = "custom-settings-btn";
+        settingsBtn.className = "sp-btn sp-settings-btn";
+        settingsBtn.title = "Settings";
+        settingsBtn.innerHTML = SETTINGS_ICON;
+        settingsBtn.addEventListener("click", function(e) {
           e.stopPropagation();
-          if (qMenuEl) qMenuEl.classList.toggle("show");
+          if (window.openOttSettings) window.openOttSettings();
         });
-        panel.insertBefore(qBtn, anchor || panel.lastChild);
+        panel.insertBefore(settingsBtn, anchor || panel.lastChild);
 
         var fitIdx = 0;
         var fitBtn = document.createElement("button");
@@ -1245,7 +1483,7 @@
           });
         }
 
-        setupCustomQualityMenu(player);
+        setupOttSettings(player);
       }
 
       async function startPlayer(ch) {
