@@ -11,8 +11,11 @@
   <meta name="apple-mobile-web-app-status-bar-style"
     content="black-translucent">
   <link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/shaka-player@4.16.2/dist/controls.css">
-  
+    href="https://cdn.jsdelivr.net/gh/filmyfly4wap/shaka-player-4.16.2/controls1.css">
+    
+  <script src="https://cdn.jsdelivr.net/gh/filmyfly4wap/shaka-player-4.16.2/shaka-player.ui.min.js">
+  </script>
+
   <!-- Font Awesome Icons for YouTube Style Arrows & Settings -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -364,7 +367,6 @@
 
     /* Side Text Label */
     .lock-side-label {
-      background: rgba(15, 23, 42, 0.88);
       border: 1px solid rgba(41, 98, 255, 0.6);
       color: #ffffff;
       font-size: clamp(12px, 1.8vw, 14px);
@@ -413,7 +415,7 @@
     #floating-lock-btn svg {
       width: clamp(20px, 2.5vw, 24px);
       height: clamp(20px, 2.5vw, 24px);
-      fill: #2962ff;
+      fill: #fff;
       filter: drop-shadow(0 0 4px rgba(41, 98, 255, 0.8));
     }
 
@@ -496,6 +498,7 @@
 
     /* Fixed Position Close Button */
     .ott-settings-close {
+      background: rgba(255, 255, 255, 0.1);
       position: absolute;
       right: 8px;
       top: 50%;
@@ -734,9 +737,7 @@
     <div class="custom-watermark"><img src="https://i.postimg.cc/SNjy16J7/cricketlive.png"></div>
   </div>
 
-  <script
-    src="https://cdn.jsdelivr.net/npm/shaka-player@4.16.2/dist/shaka-player.ui.min.js">
-  </script>
+
   <script>
     (function() {
       "use strict";
